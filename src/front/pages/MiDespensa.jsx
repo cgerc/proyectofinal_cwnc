@@ -3,9 +3,11 @@ import React, { useState } from 'react';
 function MiDespensa() {
   const [data, setData] = useState('');
   const [foods, setFoods] = useState([]);
+  const [editingFoodId, setEditingFoodId] = useState(null); // Estado para el ID del alimento en edición
+  const [editValue, setEditValue] = useState(''); // Estado para el valor editado
 
   const handleChange = (event) => {
-    console.log('Valor del input:', event.target.value); // Depuración.
+    console.log('Valor del input:', event.target.value);
     setData(event.target.value);
   };
 
@@ -17,7 +19,7 @@ function MiDespensa() {
   };
 
   const addFood = () => {
-    console.log('Agregando alimento:', data); // Depuración
+    console.log('Agregando alimento:', data);
     if (data.trim()) {
       const newFood = {
         id: Date.now().toString(),
@@ -27,8 +29,41 @@ function MiDespensa() {
       setData('');
     }
   };
+
   const removeFood = (id) => {
     setFoods((prev) => prev.filter((alimento) => alimento.id !== id));
+    if (editingFoodId === id) {
+      setEditingFoodId(null); // Salir del modo de edición si se elimina el alimento
+      setEditValue('');
+    }
+  };
+
+  const startEditing = (food) => {
+    setEditingFoodId(food.id);
+    setEditValue(food.label); // Cargar el valor actual en el input de edición
+  };
+
+  const handleEditChange = (event) => {
+    setEditValue(event.target.value); // Actualizar el valor del input de edición
+  };
+
+  const saveEdit = (id) => {
+    if (editValue.trim()) {
+      setFoods((prev) =>
+        prev.map((food) =>
+          food.id === id ? { ...food, label: editValue.trim() } : food
+        )
+      );
+    }
+    setEditingFoodId(null); // Salir del modo de edición
+    setEditValue('');
+  };
+
+  const handleEditKeyPress = (event, id) => {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      saveEdit(id);
+    }
   };
 
   return (
@@ -44,9 +79,9 @@ function MiDespensa() {
             className="btn btn-lg"
             type="button"
             style={{ backgroundColor: '#03C329', color: 'white' }}
-            onClick={addFood} // Opcional: permite agregar alimentos con el botón
+            onClick={addFood}
           >
-            Agregar alimentos
+            Agregar alimento
           </button>
         </div>
       </div>
@@ -78,14 +113,48 @@ function MiDespensa() {
                 key={food.id}
                 className="list-group-item d-flex align-items-center"
               >
-                <span>{food.label}</span>
-                <button
-                  className="btn btn-danger btn-sm ms-auto"
-                  onClick={() => removeFood(food.id)}
-                  aria-label="Eliminar alimento"
-                >
-                  🗑️
-                </button>
+                {editingFoodId === food.id ? (
+                  <div className="d-flex w-100">
+                    <input
+                      type="text"
+                      className="form-control me-2"
+                      value={editValue}
+                      onChange={handleEditChange}
+                      onKeyDown={(e) => handleEditKeyPress(e, food.id)}
+                      autoFocus
+                    />
+                    <button
+                      className="btn btn-success btn-sm me-2"
+                      onClick={() => saveEdit(food.id)}
+                      aria-label="Guardar cambios"
+                    >
+                      💾
+                    </button>
+                    <button
+                      className="btn btn-secondary btn-sm"
+                      onClick={() => setEditingFoodId(null)}
+                      aria-label="Cancelar edición"
+                    >
+                      ❌
+                    </button>
+                  </div>
+                ) : (
+                  <>
+                    <span
+                      onClick={() => startEditing(food)}
+                      style={{ cursor: 'pointer', flex: 1 }}
+                    >
+                      {food.label}
+                    </span>
+                    <button
+                      className="btn btn-danger btn-sm ms-auto"
+                      onClick={() => removeFood(food.id)}
+                      aria-label="Eliminar alimento"
+                    >
+                      🗑️
+                    </button>
+                  </>
+                )}
               </li>
             ))
           )}
