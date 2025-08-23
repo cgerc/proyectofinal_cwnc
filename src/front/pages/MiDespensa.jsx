@@ -2,32 +2,33 @@ import React, { useState } from 'react';
 
 function MiDespensa() {
   const [data, setData] = useState('');
-  const [alimentos, setAlimentos] = useState([]);
+  const [foods, setFoods] = useState([]);
 
   const handleChange = (event) => {
+    console.log('Valor del input:', event.target.value); // Depuración.
     setData(event.target.value);
   };
 
   const handleKeyPress = (event) => {
     if (event.key === 'Enter') {
       event.preventDefault();
-      addAlimento();
+      addFood();
     }
   };
 
-  const addAlimento = () => {
+  const addFood = () => {
+    console.log('Agregando alimento:', data); // Depuración
     if (data.trim()) {
-      const newAlimento = {
+      const newFood = {
         id: Date.now().toString(),
         label: data.trim(),
       };
-      setAlimentos((prev) => [...prev, newAlimento]);
+      setFoods((prev) => [...prev, newFood]);
       setData('');
     }
   };
-
-  const removeAlimento = (id) => {
-    setAlimentos((prev) => prev.filter((alimento) => alimento.id !== id));
+  const removeFood = (id) => {
+    setFoods((prev) => prev.filter((alimento) => alimento.id !== id));
   };
 
   return (
@@ -43,7 +44,7 @@ function MiDespensa() {
             className="btn btn-lg"
             type="button"
             style={{ backgroundColor: '#03C329', color: 'white' }}
-            onClick={addAlimento} // Opcional: permite agregar alimentos con el botón
+            onClick={addFood} // Opcional: permite agregar alimentos con el botón
           >
             Agregar alimentos
           </button>
@@ -61,26 +62,26 @@ function MiDespensa() {
             name="alimento"
             value={data}
             onChange={handleChange}
-            onKeyPress={handleKeyPress}
+            onKeyDown={handleKeyPress}
             placeholder="Agregar alimento"
           />
         </div>
 
         <ul className="list-group w-50 shadow-lg">
-          {alimentos.length === 0 ? (
+          {foods.length === 0 ? (
             <li className="list-group-item text-muted">
               No hay alimentos, añade alimentos
             </li>
           ) : (
-            alimentos.map((alimento) => (
+            foods.map((food) => (
               <li
-                key={alimento.id}
+                key={food.id}
                 className="list-group-item d-flex align-items-center"
               >
-                <span>{alimento.label}</span>
+                <span>{food.label}</span>
                 <button
                   className="btn btn-danger btn-sm ms-auto"
-                  onClick={() => removeAlimento(alimento.id)}
+                  onClick={() => removeFood(food.id)}
                   aria-label="Eliminar alimento"
                 >
                   🗑️
@@ -90,7 +91,7 @@ function MiDespensa() {
           )}
         </ul>
         <p className="text-muted text-center mt-3">
-          {alimentos.length} alimento{alimentos.length !== 1 ? 's' : ''} en la despensa
+          {foods.length} alimento{foods.length !== 1 ? 's' : ''} en la despensa
         </p>
       </div>
     </>
