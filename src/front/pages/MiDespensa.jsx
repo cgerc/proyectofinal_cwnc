@@ -6,11 +6,7 @@ function MiDespensa() {
   const [editingFoodId, setEditingFoodId] = useState(null); // Estado para el ID del alimento en edición
   const [editValue, setEditValue] = useState(''); // Estado para el valor editado
 
-  const newFood = {
-    id: Date.now().toString(),
-    label: data.trim(),
-    quantity: 1
-  };
+  
 
 
   const incrementQuantity = (id) => {
@@ -49,6 +45,7 @@ function MiDespensa() {
       const newFood = {
         id: Date.now().toString(),
         label: data.trim(),
+        quantity: 1
       };
       setFoods((prev) => [...prev, newFood]);
       setData('');
@@ -171,13 +168,13 @@ function MiDespensa() {
                       onClick={() => startEditing(food)}
                       style={{ cursor: 'pointer', flex: 1 }}
                     >
-                      {food.label} ({food.quantity})
+                      {food.label} ({food.quantity || 1})
                     </span>
                     <div className= "d-flex align-items-center">
                       <button className="btn btn-outline-primary btn-sm me-2"
                       onClick={() => decrementQuantity(food.id)}
                       aria-label="Disminuir cantidad"
-                      disabled= {food.quantity <=1}
+                      disabled= {(food.quantity || 1) <=1}
                       >
                         -
                       </button>
