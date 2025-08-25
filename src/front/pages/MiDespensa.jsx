@@ -2,32 +2,68 @@ import React, { useState } from 'react';
 
 function MiDespensa() {
   const [data, setData] = useState('');
-  const [alimentos, setAlimentos] = useState([]);
+  const [foods, setFoods] = useState([]);
+  const [editingFoodId, setEditingFoodId] = useState(null); // Estado para el ID del alimento en edición
+  const [editValue, setEditValue] = useState(''); // Estado para el valor editado
 
   const handleChange = (event) => {
+    console.log('Valor del input:', event.target.value);
     setData(event.target.value);
   };
 
   const handleKeyPress = (event) => {
     if (event.key === 'Enter') {
       event.preventDefault();
-      addAlimento();
+      addFood();
     }
   };
 
-  const addAlimento = () => {
+  const addFood = () => {
+    console.log('Agregando alimento:', data);
     if (data.trim()) {
-      const newAlimento = {
+      const newFood = {
         id: Date.now().toString(),
         label: data.trim(),
       };
-      setAlimentos((prev) => [...prev, newAlimento]);
+      setFoods((prev) => [...prev, newFood]);
       setData('');
     }
   };
 
-  const removeAlimento = (id) => {
-    setAlimentos((prev) => prev.filter((alimento) => alimento.id !== id));
+  const removeFood = (id) => {
+    setFoods((prev) => prev.filter((alimento) => alimento.id !== id));
+    if (editingFoodId === id) {
+      setEditingFoodId(null); // Salir del modo de edición si se elimina el alimento
+      setEditValue('');
+    }
+  };
+
+  const startEditing = (food) => {
+    setEditingFoodId(food.id);
+    setEditValue(food.label); // Cargar el valor actual en el input de edición
+  };
+
+  const handleEditChange = (event) => {
+    setEditValue(event.target.value); // Actualizar el valor del input de edición
+  };
+
+  const saveEdit = (id) => {
+    if (editValue.trim()) {
+      setFoods((prev) =>
+        prev.map((food) =>
+          food.id === id ? { ...food, label: editValue.trim() } : food
+        )
+      );
+    }
+    setEditingFoodId(null); // Salir del modo de edición
+    setEditValue('');
+  };
+
+  const handleEditKeyPress = (event, id) => {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      saveEdit(id);
+    }
   };
 
   return (
@@ -43,9 +79,9 @@ function MiDespensa() {
             className="btn btn-lg"
             type="button"
             style={{ backgroundColor: '#03C329', color: 'white' }}
-            onClick={addAlimento} // Opcional: permite agregar alimentos con el botón
+            onClick={addFood}
           >
-            Agregar alimentos
+            Agregar alimento
           </button>
         </div>
       </div>
@@ -61,36 +97,70 @@ function MiDespensa() {
             name="alimento"
             value={data}
             onChange={handleChange}
-            onKeyPress={handleKeyPress}
+            onKeyDown={handleKeyPress}
             placeholder="Agregar alimento"
           />
         </div>
 
         <ul className="list-group w-50 shadow-lg">
-          {alimentos.length === 0 ? (
+          {foods.length === 0 ? (
             <li className="list-group-item text-muted">
               No hay alimentos, añade alimentos
             </li>
           ) : (
-            alimentos.map((alimento) => (
+            foods.map((food) => (
               <li
-                key={alimento.id}
+                key={food.id}
                 className="list-group-item d-flex align-items-center"
               >
-                <span>{alimento.label}</span>
-                <button
-                  className="btn btn-danger btn-sm ms-auto"
-                  onClick={() => removeAlimento(alimento.id)}
-                  aria-label="Eliminar alimento"
-                >
-                  🗑️
-                </button>
+                {editingFoodId === food.id ? (
+                  <div className="d-flex w-100">
+                    <input
+                      type="text"
+                      className="form-control me-2"
+                      value={editValue}
+                      onChange={handleEditChange}
+                      onKeyDown={(e) => handleEditKeyPress(e, food.id)}
+                      autoFocus
+                    />
+                    <button
+                      className="btn btn-success btn-sm me-2"
+                      onClick={() => saveEdit(food.id)}
+                      aria-label="Guardar cambios"
+                    >
+                      💾
+                    </button>
+                    <button
+                      className="btn btn-secondary btn-sm"
+                      onClick={() => setEditingFoodId(null)}
+                      aria-label="Cancelar edición"
+                    >
+                      ❌
+                    </button>
+                  </div>
+                ) : (
+                  <>
+                    <span
+                      onClick={() => startEditing(food)}
+                      style={{ cursor: 'pointer', flex: 1 }}
+                    >
+                      {food.label}
+                    </span>
+                    <button
+                      className="btn btn-danger btn-sm ms-auto"
+                      onClick={() => removeFood(food.id)}
+                      aria-label="Eliminar alimento"
+                    >
+                      🗑️
+                    </button>
+                  </>
+                )}
               </li>
             ))
           )}
         </ul>
         <p className="text-muted text-center mt-3">
-          {alimentos.length} alimento{alimentos.length !== 1 ? 's' : ''} en la despensa
+          {foods.length} alimento{foods.length !== 1 ? 's' : ''} en la despensa
         </p>
       </div>
     </>
