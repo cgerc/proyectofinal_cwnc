@@ -2,12 +2,18 @@ import React, { useState } from 'react';
 
 function Pantry() {
   const [data, setData] = useState('');
-  const [foods, setFoods] = useState([]);
-  const [editingFoodId, setEditingFoodId] = useState(null); // Estado para el ID del alimento en edición
-  const [editValue, setEditValue] = useState(''); // Estado para el valor editado
+  const [foods, setFoods] = useState(() => {
+   // Cargar datod de localStorage al iniciar
+    const savedFoods = localStorage.getItem('pantryFoods');
+    return savedFoods ? JSON.parse(savedFoods) : [];
+  });
+  const [editingFoodId, setEditingFoodId] = useState(null);
+  const [editValue, setEditValue] = useState('');
 
-
-
+  // Guardar foods en localStorage cada vez que cambie
+  useEffect(() => {
+    localStorage.setItem('pantryFoods', JSON.stringify(foods));
+  }, [foods]);
 
   const incrementQuantity = (id) => {
     setFoods((prev) =>
@@ -97,14 +103,7 @@ function Pantry() {
           <p className="col-md-8 fs-4">
             Ingresa los alimentos que tengas en tu despensa y recibe recetas adaptadas a ti
           </p>
-          <button
-            className="btn btn-lg"
-            type="button"
-            style={{ backgroundColor: '#03C329', color: 'white' }}
-            onClick={addFood}
-          >
-            Agregar alimento
-          </button>
+        
         </div>
       </div>
 
