@@ -42,7 +42,7 @@ export const Home = () => {
 </div>
 
 <div className="Funcionalidades container py-5">
-  <p className="fs-1 text-center mb-4"><strong>Funcionalidades</strong></p>
+  <p className="fs-1 text-center mb-4"><strong>Funcionalidades .</strong></p>
 
   <div className="mb-4">
 	<img  className="symbol1" src="https://www.shutterstock.com/image-vector/green-chef-logo-design-template-260nw-2639161045.jpg"></img>
