@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 
-function MiDespensa() {
+function Pantry() {
   const [data, setData] = useState('');
   const [foods, setFoods] = useState([]);
   const [editingFoodId, setEditingFoodId] = useState(null); // Estado para el ID del alimento en edición
   const [editValue, setEditValue] = useState(''); // Estado para el valor editado
 
-  
+
 
 
   const incrementQuantity = (id) => {
@@ -108,7 +108,7 @@ function MiDespensa() {
         </div>
       </div>
 
-      {/* Lista de alimentos */}
+
       <div className="d-flex flex-column align-items-center mt-3">
         <h2>Alimentos en tu despensa</h2>
 
@@ -159,9 +159,9 @@ function MiDespensa() {
                     >
                       ❌
                     </button>
-                    
+
                   </div>
-                  
+
                 ) : (
                   <>
                     <span
@@ -170,27 +170,29 @@ function MiDespensa() {
                     >
                       {food.label} ({food.quantity || 1})
                     </span>
-                    <div className= "d-flex align-items-center">
+                    <div className="d-flex align-items-center">
                       <button className="btn btn-outline-primary btn-sm me-2"
-                      onClick={() => decrementQuantity(food.id)}
-                      aria-label="Disminuir cantidad"
-                      disabled= {(food.quantity || 1) <=1}
+                        onClick={() => incrementQuantity(food.id)}
+                        aria-label="Aumentar cantidad"
+                      >
+                        +
+                      </button>
+
+                      <button className="btn btn-outline-primary btn-sm me-2"
+                        onClick={() => decrementQuantity(food.id)}
+                        aria-label="Disminuir cantidad"
+                        disabled={(food.quantity || 1) <= 1}
                       >
                         -
                       </button>
-                    <button className="btn btn-outline-primary btn-sm me-2"
-                    onClick={() => incrementQuantity(food.id)}
-                    aria-label="Aumentar cantidad"
-                    >
-                      +
-                    </button>
-                    <button
-                      className="btn btn-danger btn-sm ms-auto"
-                      onClick={() => removeFood(food.id)}
-                      aria-label="Eliminar alimento"
-                    >
-                      🗑️
-                    </button>
+
+                      <button
+                        className="btn btn-danger btn-sm ms-auto"
+                        onClick={() => removeFood(food.id)}
+                        aria-label="Eliminar alimento"
+                      >
+                        🗑️
+                      </button>
                     </div>
                   </>
                 )}
@@ -201,10 +203,10 @@ function MiDespensa() {
         <p className="text-muted text-center mt-3">
           {foods.length} alimento{foods.length !== 1 ? 's' : ''} en la despensa
         </p>
-        
+
       </div>
     </>
   );
 }
 
-export default MiDespensa;
+export default Pantry;
