@@ -6,6 +6,24 @@ function MiDespensa() {
   const [editingFoodId, setEditingFoodId] = useState(null); // Estado para el ID del alimento en edición
   const [editValue, setEditValue] = useState(''); // Estado para el valor editado
 
+  const incrementQuantity = (id) => {
+  setFoods((prev) =>
+    prev.map((food) =>
+      food.id === id ? { ...food, quantity: food.quantity + 1 } : food
+    )
+  );
+};
+
+const decrementQuantity = (id) => {
+  setFoods((prev) =>
+    prev.map((food) =>
+      food.id === id && food.quantity > 1
+        ? { ...food, quantity: food.quantity - 1 }
+        : food
+    )
+  );
+};
+
   const handleChange = (event) => {
     console.log('Valor del input:', event.target.value);
     setData(event.target.value);
@@ -146,6 +164,7 @@ function MiDespensa() {
                     >
                       {food.label}
                     </span>
+                    
                     <button
                       className="btn btn-danger btn-sm ms-auto"
                       onClick={() => removeFood(food.id)}
