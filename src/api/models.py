@@ -13,6 +13,13 @@ class User(db.Model):
     pantry = db.relationship('Pantry') #editar la relacion para que sea uno es a uno
     restriction = db.relationship('Restriction')
 
+    def serialize(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'email': self.email,
+        }
+
 class Restriction(db.Model):
     id: Mapped[int] = mapped_column(primary_key=True)
 
@@ -41,3 +48,4 @@ class Recipe(db.Model):
     time: Mapped[int] = mapped_column(nullable=False)
 
     ingredient: Mapped[int] = mapped_column(ForeignKey('ingredient.id'), nullable=False)
+
