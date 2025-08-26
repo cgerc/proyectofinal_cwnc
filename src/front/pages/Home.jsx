@@ -36,13 +36,15 @@ export const Home = () => {
 		
 		<>
 		<div className="container bg-success fondo container0 text-white py-5">
-  <p className="text-start fs-1"><strong>Descubre qué<br />cocinar con lo<br />que tienes</strong></p>
+  <p className="text-start fs-1 texto1"><strong>Descubre qué<br />cocinar con lo<br />que tienes</strong></p>
   <p className="fs-4 p1">Escribe tus ingredientes y recibe<br />recetas al instante, sin complicaciones</p>
   <img className="imagen mt-4" src="https://chatgpt.com/backend-api/public_content/enc/eyJpZCI6Im1fNjhhYTc3MjUyMjU4ODE5MThkNTU1ODg1ZTJkMGI4MDM6ZmlsZV8wMDAwMDAwMDY4ZDg2MjMwYmVhMGQ3MTI2OTg0MmRkYiIsInRzIjoiNDg3Nzc4IiwicCI6InB5aSIsInNpZyI6ImM0NGM4MmVmN2E2NDk2OGY2ZGY3ZTc1N2VjOTgxYWVkYjQ0NzhhZTMyNGZjZThkYzRiMDAwZjQ2MWYzZmQ4OGMiLCJ2IjoiMCIsImdpem1vX2lkIjpudWxsfQ==" alt="Cocina con lo que tienes" />
 </div>
+<button  type="button" class="btn btn-success boton">Empieza aqui!</button>
+
 
 <div className="Funcionalidades container py-5">
-  <p className="fs-1 text-center mb-4"><strong>Funcionalidades .</strong></p>
+  <p className="fs-1 text-center mb-4"><strong>Funcionalidades</strong></p>
 
   <div className="mb-4">
 	<img  className="symbol1" src="https://www.shutterstock.com/image-vector/green-chef-logo-design-template-260nw-2639161045.jpg"></img>
@@ -91,7 +93,7 @@ export const Home = () => {
       </div>
     </div>
     <div class="carousel-item">
-      <img src="https://chatgpt.com/backend-api/public_content/enc/eyJpZCI6Im1fNjhhYjg1YWQyMzUwODE5MWE4MDE1ZDg2ZWI4ZTkxMTE6ZmlsZV8wMDAwMDAwMGM3NmM2MWY5YTdhMTVhOWUyMTU4OTYwNyIsInRzIjoiNDg3Nzk3IiwicCI6InB5aSIsInNpZyI6IjhmNTc2MzJlNzlhYWI5ZWU4YTZmYjA5ODI2MWQ1ZGNiYzQ0YmZhMmYxNmQ5MDkyMTgyOTBhZDVkODQ0YWQ4YjAiLCJ2IjoiMCIsImdpem1vX2lkIjpudWxsfQ==" class="d-block w-100" alt="..."/>
+      <img src="https://chatgpt.com/backend-api/public_content/enc/eyJpZCI6Im1fNjhhZDAyMjgxYjk0ODE5MTgxMWEyMzM0ZWVlYjAwYzM6ZmlsZV8wMDAwMDAwMGMyYzA2MWY4YjVkYjVhNjk0NzZjMmNlOCIsInRzIjoiNDg3ODI0IiwicCI6InB5aSIsInNpZyI6ImM5ZWQ2ZDY2NjA5M2ExOTZlNzI2ZDNmNTM4N2Y4NDg4MzlhNzg3ZTAwZDJiYzVkMDIzNTMxZWZkZTljOTZlYzMiLCJ2IjoiMCIsImdpem1vX2lkIjpudWxsfQ==" class="d-block w-100" alt="..."/>
       <div class="carousel-caption d-none d-md-block">
         <h5>Third slide label</h5>
         <p>Some representative placeholder content for the third slide.</p>

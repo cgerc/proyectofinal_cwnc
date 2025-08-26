@@ -1,22 +1,7 @@
-.home{
-    color: #28a745;
-    position: relative;
-    left: 950px;
-}
-.mi_despensa{
-     color: #28a745;
-    position: relative;
-    left: 970px;
-}
-.mis_recetas{
-     color: #28a745;
-    position: relative;
-    left: 990px;
-}
-.login{
-     background-color: #28a745;
-    position: relative;
-    left: 1000px;
+.nav{
+  position: relative;
+  left: -60px;
+  
 }
 
 
@@ -29,8 +14,8 @@ body {
 }
 .p1{
     position: relative;
-    top: 150px;
-    left: -300px;
+    top: 50px;
+    left: -310px;
 }
 .fondo {
   background: linear-gradient(135deg, #28a745 0%, #218838 100%);
@@ -38,6 +23,20 @@ body {
   padding: 4rem 2rem;
   text-align: left;
 }
+.texto1{
+  position: relative;
+  top:-90px
+}
+.boton{
+  position: relative;
+  top: -120px;
+  left: 100px;
+  width: 200px;
+  height: 50px;
+  border-radius: 10px;
+}
+
+
 
 .container0 img.imagen {
   width: 100%;

@@ -1,22 +1,19 @@
 import { Link } from "react-router-dom";
-
 export const Navbar = () => {
-
-	return (
-		<nav className="navbar navbar-light bg-light nav">
-			<div className="container">
-
-				<div className="ml-auto nav">
-					<img src=""></img>
-					<p><a class="link-opacity-75-hover home" href="#">Home</a></p>
-					<p><a class="link-opacity-75-hover mi_despensa" href="#">Mi despensa</a></p>
-					<p><a class="link-opacity-75-hover mis_recetas" href="#">Mis recetas</a></p>
-					<button type="button" class="btn btn-primary login">Login</button>
-					
-
-
-				</div>
-			</div>
-		</nav>
-	);
+    return (
+        <ul className="nav justify-content-end nav">
+            <li className="nav-item ">
+                <a className="nav-link active text-success " aria-current="page" href="#">Home</a>
+            </li>
+            <li className="nav-item">
+                <a className="nav-link text-success " href="#">Mi despensa</a>
+            </li>
+            <li className="nav-item">
+                <a className="nav-link text-success" href="#">Mis recetas</a>
+            </li>
+            <li>
+                <button className="btn btn-primary " type="button" style={{ backgroundColor: '#03C329', color: 'white' }}>Login</button>
+            </li>
+        </ul>
+    );
 };
