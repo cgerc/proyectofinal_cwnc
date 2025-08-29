@@ -35,9 +35,6 @@ body {
   height: 50px;
   border-radius: 10px;
 }
-
-
-
 .container0 img.imagen {
   width: 100%;
   max-width: 500px;
@@ -45,8 +42,6 @@ body {
   margin-top: 2rem;
   border-radius: 15px;
 }
-
-
 .Funcionalidades {
   padding: 4rem 2rem;
   background-color: white;
@@ -100,7 +95,20 @@ body {
   width: 60px;
   margin: 2rem auto;
 }
-
+.Recetas{
+  background-color: lightgrey;
+  padding: 4rem 2rem;
+  width: 1320px;
+  position: relative;
+  left: 58px;
+  
+ 
+}
+.card{
+  width: 300px;
+  position: relative;
+  left: 55px;
+}
 
 .Testimonios {
   background-color: white;

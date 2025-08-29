@@ -81,22 +81,16 @@ export const Home = () => {
     <div class="carousel-item active">
       <img src="https://chatgpt.com/backend-api/public_content/enc/eyJpZCI6Im1fNjhhYjg0NDIwMzY4ODE5MThjZTA2YTVlZDUxMDg2MTA6ZmlsZV8wMDAwMDAwMDJiMjQ2MWY5OWVhYmMyMzA4YjhjMDdjMCIsInRzIjoiNDg3Nzk3IiwicCI6InB5aSIsInNpZyI6IjNmNDRjY2RhNmU1Y2IxM2Q4MDNmOWI1MmZlYTFjZmY3MWU0NzRmOTM2NDg4YzlhMjk1Yzc0OTkxMWI1YWQxZWQiLCJ2IjoiMCIsImdpem1vX2lkIjpudWxsfQ==" class="d-block w-100" alt="..."/>
       <div class="carousel-caption d-none d-md-block">
-        <h5>First slide label</h5>
-        <p>Some representative placeholder content for the first slide.</p>
       </div>
     </div>
     <div class="carousel-item">
       <img src="https://chatgpt.com/backend-api/public_content/enc/eyJpZCI6Im1fNjhhYjg0ZDNjMjQ0ODE5MTgwY2Q0NzAxMmVmNmVmN2Q6ZmlsZV8wMDAwMDAwMDI0ZTg2MWY2ODA2YjUwNzgyNWI1MDI1ZiIsInRzIjoiNDg3Nzk3IiwicCI6InB5aSIsInNpZyI6IjU0YTFlOWRmYWYxYWY3MGQ0N2ZhMTE3MzdiYWMzYTZmZDdlOGI0NTI0M2ZmMWMxNWUxMjk0NjU2NzQzMGY1OTYiLCJ2IjoiMCIsImdpem1vX2lkIjpudWxsfQ==" class="d-block w-100" alt="..."/>
       <div class="carousel-caption d-none d-md-block">
-        <h5>Second slide label</h5>
-        <p>Some representative placeholder content for the second slide.</p>
       </div>
     </div>
     <div class="carousel-item">
       <img src="https://chatgpt.com/backend-api/public_content/enc/eyJpZCI6Im1fNjhhZDAyMjgxYjk0ODE5MTgxMWEyMzM0ZWVlYjAwYzM6ZmlsZV8wMDAwMDAwMGMyYzA2MWY4YjVkYjVhNjk0NzZjMmNlOCIsInRzIjoiNDg3ODI0IiwicCI6InB5aSIsInNpZyI6ImM5ZWQ2ZDY2NjA5M2ExOTZlNzI2ZDNmNTM4N2Y4NDg4MzlhNzg3ZTAwZDJiYzVkMDIzNTMxZWZkZTljOTZlYzMiLCJ2IjoiMCIsImdpem1vX2lkIjpudWxsfQ==" class="d-block w-100" alt="..."/>
       <div class="carousel-caption d-none d-md-block">
-        <h5>Third slide label</h5>
-        <p>Some representative placeholder content for the third slide.</p>
       </div>
     </div>
   </div>
@@ -110,9 +104,10 @@ export const Home = () => {
   </button>
 </div>
 </div>
-
-
 </div>
+<div>
+</div>
+
 
 <div className="Como_Funciona container py-5 bg-light">
   <p className="fs-1 text-center mb-5"><strong>Como funciona?</strong></p>
@@ -132,6 +127,17 @@ export const Home = () => {
 
   </div>
 </div>
+
+<div className="Recetas">
+<div class="card">
+  <img src="..." class="card-img-top" alt="..."/>
+  <div class="card-body">
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
+  </div>
+</div>
+
+ </div>
+
 
 <div className="Testimonios container py-5">
   <p className="fs-1 text-center mb-4"><strong>Testimonios</strong></p>
