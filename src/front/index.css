@@ -1,0 +1,183 @@
+.nav{
+  position: relative;
+  left: -60px;
+  
+}
+
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f8f9fa;
+  color: #212529;
+}
+.p1{
+    position: relative;
+    top: 50px;
+    left: -310px;
+}
+.fondo {
+  background: linear-gradient(135deg, #28a745 0%, #218838 100%);
+  color: white;
+  padding: 4rem 2rem;
+  text-align: left;
+}
+.texto1{
+  position: relative;
+  top:-90px
+}
+.boton{
+  position: relative;
+  top: -120px;
+  left: 100px;
+  width: 200px;
+  height: 50px;
+  border-radius: 10px;
+}
+.container0 img.imagen {
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  margin-top: 2rem;
+  border-radius: 15px;
+}
+.Funcionalidades {
+  padding: 4rem 2rem;
+  background-color: white;
+  height: 900px;
+}
+.Funcionalidades .symbol1{
+    width: 50px;
+    position: relative;
+    top: 20px;
+    left: -10px;
+
+}
+.imagen3{
+    width: 510px;
+    position: relative;
+    top: -670px;
+    left: 650px;
+}
+.imagenes{
+    width: 450px;
+}
+
+
+.Funcionalidades .fs-4 {
+  margin-top: 1rem;
+  font-weight: 500;
+}
+
+.Funcionalidades .fs-6 {
+  color: #555;
+  margin-bottom: 1.5rem;
+}
+
+
+.Como_Funciona {
+  padding: 4rem 2rem;
+  background-color: #f1f1f1;
+  text-align: center;
+}
+
+.Como_Funciona .imagen1,
+.Como_Funciona .imagen2 {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  border-radius: 10px;
+  margin: 1.5rem auto;
+}
+
+.Como_Funciona .symbol {
+  width: 60px;
+  margin: 2rem auto;
+}
+.Recetas{
+  background-color: lightgrey;
+  padding: 4rem 2rem;
+  width: 1320px;
+  position: relative;
+  left: 58px;
+  
+ 
+}
+.card{
+  width: 300px;
+  position: relative;
+  left: 55px;
+}
+
+.Testimonios {
+  background-color: white;
+  padding: 4rem 2rem;
+}
+
+.Testimonios .shadow {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+}
+
+
+.CallToAction {
+  background: #28a745;
+  padding: 4rem 2rem;
+}
+
+.CallToAction button {
+  padding: 0.8rem 2rem;
+  font-size: 1.2rem;
+  border: none;
+  border-radius: 8px;
+  transition: 0.3s;
+}
+
+.CallToAction button:hover {
+  background-color: #ffffff;
+  color: #28a745;
+}
+
+
+footer {
+  background-color: #222;
+  color: white;
+  text-align: center;
+  padding: 2rem 1rem;
+}
+
+
+@media (min-width: 768px) {
+  .container0 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+  }
+
+  .container0 p {
+    max-width: 50%;
+  }
+
+  .Como_Funciona .d-flex {
+    flex-direction: row;
+    justify-content: center;
+    gap: 2rem;
+  }
+
+  .Como_Funciona .imagen1,
+  .Como_Funciona .imagen2 {
+    max-width: 300px;
+  }
+
+  .Testimonios .row {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .Testimonios .col-md-6 {
+    width: 45%;
+  }
+}
+
