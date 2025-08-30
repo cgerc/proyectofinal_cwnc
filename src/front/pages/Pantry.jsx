@@ -10,7 +10,6 @@ function Pantry() {
   const [editingFoodId, setEditingFoodId] = useState(null);
   const [editValue, setEditValue] = useState('');
 
-  // Guardar foods en localStorage cada vez que cambie
   useEffect(() => {
     localStorage.setItem('pantryFoods', JSON.stringify(foods));
   }, [foods]);
