@@ -12,6 +12,7 @@ import { Demo } from "./pages/Demo";
 import MiDespensa from "./pages/MiDespensa";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -28,7 +29,7 @@ export const router = createBrowserRouter(
       <Route path="/" element={<Home />} />
       <Route path="/single/:theId" element={<Single />} />  {/* Dynamic route for single items */}
       <Route path="/demo" element={<Demo />} />
-      <Route path="/midespensa" element={<MiDespensa />} />
+      <Route path="/midespensa" element={<ProtectedRoute><MiDespensa /></ProtectedRoute>} />
       <Route path="/register" element={<Register />} />
       <Route path="/login" element={<Login />} />
     </Route>
