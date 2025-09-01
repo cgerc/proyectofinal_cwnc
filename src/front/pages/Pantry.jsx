@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 function Pantry() {
   const [data, setData] = useState('');
   const [foods, setFoods] = useState(() => {
-   // Cargar datod de localStorage al iniciar
+    // Cargar datod de localStorage al iniciar
     const savedFoods = localStorage.getItem('pantryFoods');
     return savedFoods ? JSON.parse(savedFoods) : [];
   });
@@ -47,12 +47,21 @@ function Pantry() {
   const addFood = () => {
     console.log('Agregando alimento:', data);
     if (data.trim()) {
-      const newFood = {
-        id: Date.now().toString(),
-        label: data.trim(),
-        quantity: 1
-      };
-      setFoods((prev) => [...prev, newFood]);
+      setFoods((prev) => {
+        const existingFood = prev.find((food) => food.label.toLowerCase() === data.trim().toLowerCase());
+        if (existingFood) {
+          return prev.map((food) =>
+            food.id === existingFood.id ? { ...food, quantity: food.quantity + 1 } : food
+          );
+        } else {
+          const newFood = {
+            id: Date.now().toString(),
+            label: data.trim(),
+            quantity: 1,
+          };
+          return [...prev, newFood];
+        }
+      });
       setData('');
     }
   };
@@ -102,7 +111,7 @@ function Pantry() {
           <p className="col-md-8 fs-4">
             Ingresa los alimentos que tengas en tu despensa y recibe recetas adaptadas a ti
           </p>
-        
+
         </div>
       </div>
 
