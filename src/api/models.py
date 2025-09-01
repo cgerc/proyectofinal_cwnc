@@ -9,9 +9,18 @@ class User(db.Model):
     name: Mapped[str] = mapped_column(nullable=False)
     email: Mapped[str] = mapped_column(nullable=False)
     password: Mapped[str] = mapped_column(nullable=False)
+    #is_active: Mapped[bool] = mapped_column(Boolean(), nullable=False, default=True)
+    #acces_token: Mapped[str] = mapped_column(String, nullable=True)
 
     pantry = db.relationship('Pantry') #editar la relacion para que sea uno es a uno
     restriction = db.relationship('Restriction')
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "email": self.email,
+            "name": self.name
+        }
 
 class Restriction(db.Model):
     id: Mapped[int] = mapped_column(primary_key=True)
