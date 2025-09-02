@@ -32,6 +32,7 @@ export const router = createBrowserRouter(
       <Route path="/pantry" element={<ProtectedRoute><Pantry /></ProtectedRoute>} />
       <Route path="/register" element={<Register />} />
       <Route path="/login" element={<Login />} />
+      <Route path="/home" element={<Home />}/>
     </Route>
   )
 );
