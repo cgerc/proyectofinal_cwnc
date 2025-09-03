@@ -13,6 +13,7 @@ function Pantry() {
       });
       const data = await response.json();
       setRecipes(data);
+      console.log(data)
     } catch (error) {
       console.error("Error", error);
     }
