@@ -5,13 +5,12 @@ import os
 from flask import Flask, request, jsonify, url_for, send_from_directory
 from flask_migrate import Migrate
 from flask_swagger import swagger
-from src.api.utils import APIException, generate_sitemap
-from src.api.models import db
-from src.api.routes import api
-from src.api.admin import setup_admin
-from src.api.commands import setup_commands
-from src.api.extensions import jwt
-
+from api.utils import APIException, generate_sitemap
+from api.models import db
+from api.routes import api
+from api.admin import setup_admin
+from api.commands import setup_commands
+from api.extensions import jwt
 
 
 # from models import Person
@@ -61,6 +60,8 @@ def sitemap():
     return send_from_directory(static_file_dir, 'index.html')
 
 # any other endpoint will try to serve it like a static file
+
+
 @app.route('/<path:path>', methods=['GET'])
 def serve_any_other_file(path):
     if not os.path.isfile(os.path.join(static_file_dir, path)):

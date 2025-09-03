@@ -2,10 +2,10 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
-from src.api.models import db, User
+from api.models import db, User
 from flask_cors import CORS
-from src.api.extensions import bcrypt
-from src.api.utils import generate_sitemap, APIException
+from api.extensions import bcrypt
+from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
 
 
@@ -23,6 +23,7 @@ def handle_hello():
     }
 
     return jsonify(response_body), 200
+
 
 @api.route('/user', methods=['POST'])
 def create_user():
@@ -43,9 +44,8 @@ def create_user():
 
     user = User()
     user.email = email
-    user.name = request.json.get("name")  
-    #user.is_active = True
-
+    user.name = request.json.get("name")
+    # user.is_active = True
 
     # hashed password
     hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
@@ -55,6 +55,7 @@ def create_user():
     db.session.commit()
 
     return jsonify({"message": "User created"}), 200
+
 
 @api.route('/user/login', methods=['POST'])
 def login():
@@ -68,11 +69,13 @@ def login():
     if not bcrypt.check_password_hash(user.password, password):
         return jsonify({"message": "Invalid password"}), 400
     access_token = create_access_token(identity=email)
-    #user.access_token = access_token
+    # user.access_token = access_token
     db.session.commit()
-    return jsonify({ "access_token": access_token, "user": user.serialize() }), 200
+    return jsonify({"access_token": access_token, "user": user.serialize()}), 200
 
-#crear vistas protegidas (privdas)
+# crear vistas protegidas (privdas)
+
+
 @api.route('/users')
 @jwt_required()
 def get_all_users():
@@ -80,4 +83,4 @@ def get_all_users():
     users = list(map(lambda user: user.serialize(), users))
     return jsonify(users), 200
 
-#agregar funcion para validar el token cuando caduque
+# agregar funcion para validar el token cuando caduque
