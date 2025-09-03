@@ -5,6 +5,12 @@ import os
 from flask import Flask, request, jsonify, url_for, send_from_directory
 from flask_migrate import Migrate
 from flask_swagger import swagger
+from flask_cors import CORS
+from dotenv import load_dotenv
+from phi.agent import Agent
+from phi.model.openai import OpenAIChat
+import os, json
+from flask_cors import CORS
 from src.api.utils import APIException, generate_sitemap
 from src.api.models import db
 from src.api.routes import api
@@ -12,6 +18,39 @@ from src.api.admin import setup_admin
 from src.api.commands import setup_commands
 from src.api.extensions import jwt
 
+app = Flask(__name__)
+
+CORS(app, resources={r"/api/*": {"origins": "http://localhost:3000"}}, supports_credentials=True)
+load_dotenv()
+
+agent = Agent(
+    model=OpenAIChat(
+        id="gpt-4o-mini",
+        api_key=os.getenv("OPENAI_API_KEY")
+    ),
+    description="soy un asistente que genera recetas de cocina",
+    instructions=[
+        "Responde SIEMPRE con un JSON válido.",
+        "Genera una receta de cocina a solo con los ingredientes que te doy y que la preparacion sea detallada",
+        "Usa solo los ingredientes proporcionados por el usuario; no agregues otros. Si falta algo esencial, indícalo en los ingredientes como sugerencia opcional.",
+        "Responde en formato json con los campos: titulo, ingredientes (lista) y preparacion (lista), dificultad (con una puntuacion entre 1-5), y tiempo estimado de la preparacion.",
+        "Devuelve un objeto con la clave 'opciones', que sea una lista de exactamente 3 recetas.",
+        "Escribe en español y NO añadas texto fuera del JSON."
+        ],
+    show_tool_calls=True,
+    markdown=True, 
+)
+
+@app.route('/api/recipe', methods=['POST'])
+def ap_recipes():
+    payload = request.get_json(force=True) or {}
+    ingredients = payload.get("ingredientes", [])
+    if not ingredients:
+        return jsonify({"error": "No se proporcionaron ingredientes"}), 400
+
+    # Lógica para generar recetas a partir de los ingredientes
+    response = agent.run({"ingredientes": ingredients})
+    return jsonify(response.content), 200
 
 
 # from models import Person
@@ -19,7 +58,6 @@ from src.api.extensions import jwt
 ENV = "development" if os.getenv("FLASK_DEBUG") == "1" else "production"
 static_file_dir = os.path.join(os.path.dirname(
     os.path.realpath(__file__)), '../dist/')
-app = Flask(__name__)
 app.url_map.strict_slashes = False
 jwt.init_app(app)
 
