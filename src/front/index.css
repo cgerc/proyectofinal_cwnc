@@ -23,11 +23,12 @@ body {
   padding: 4rem 2rem;
   text-align: left;
 }
-.texto1{
+.text1{
   position: relative;
-  top:-90px
+  top:-90px;
+  left: 20px;
 }
-.boton{
+.button1{
   position: relative;
   top: -120px;
   left: 100px;
@@ -42,12 +43,12 @@ body {
   margin-top: 2rem;
   border-radius: 15px;
 }
-.Funcionalidades {
+.Functionalities {
   padding: 4rem 2rem;
   background-color: white;
   height: 900px;
 }
-.Funcionalidades .symbol1{
+.Functionalities .symbol1{
     width: 50px;
     position: relative;
     top: 20px;
@@ -65,25 +66,25 @@ body {
 }
 
 
-.Funcionalidades .fs-4 {
+.Functionalities .fs-4 {
   margin-top: 1rem;
   font-weight: 500;
 }
 
-.Funcionalidades .fs-6 {
+.Functionalities .fs-6 {
   color: #555;
   margin-bottom: 1.5rem;
 }
 
 
-.Como_Funciona {
+.howItWorks{
   padding: 4rem 2rem;
   background-color: #f1f1f1;
   text-align: center;
 }
 
-.Como_Funciona .imagen1,
-.Como_Funciona .imagen2 {
+.howItWorks .imagen1,
+.howItWorks .imagen2 {
   width: 100%;
   max-width: 400px;
   height: auto;
@@ -91,31 +92,43 @@ body {
   margin: 1.5rem auto;
 }
 
-.Como_Funciona .symbol {
+.howItWorks .symbol {
   width: 60px;
   margin: 2rem auto;
 }
-.Recetas{
+.Recipes{
   background-color: lightgrey;
   padding: 4rem 2rem;
   width: 1320px;
   position: relative;
   left: 58px;
+  height: 500px;
   
- 
 }
 .card{
   width: 300px;
   position: relative;
   left: 55px;
+  top: -30px;
+}
+.card2{
+  position: relative;
+  top: -430px;
+  left: 500px;
+}
+.card3{
+  position: relative;
+  top: -830px;
+  left: 940px;
 }
 
-.Testimonios {
+
+.Testimonials {
   background-color: white;
   padding: 4rem 2rem;
 }
 
-.Testimonios .shadow {
+.Testimonials .shadow {
   border: 1px solid #ddd;
   border-radius: 10px;
 }

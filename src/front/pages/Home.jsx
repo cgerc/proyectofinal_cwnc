@@ -24,12 +24,12 @@ export const Home = () => {
   return (
     <>
       <div className="container bg-success fondo container0 text-white py-5">
-        <p className="text-start fs-1 texto1"><strong>Descubre qué<br />cocinar con lo<br />que tienes</strong></p>
+        <p className="text-start fs-1 text1"><strong>Descubre qué<br />cocinar con lo<br />que tienes</strong></p>
         <p className="fs-4 p1">Escribe tus ingredientes y recibe<br />recetas al instante, sin complicaciones</p>
-        <img className="imagen mt-4" src="https://chatgpt.com/backend-api/public_content/enc/eyJpZCI6Im1fNjhhYTc3MjUyMjU4ODE5MThkNTU1ODg1ZTJkMGI4MDM6ZmlsZV8wMDAwMDAwMDY4ZDg2MjMwYmVhMGQ3MTI2OTg0MmRkYiIsInRzIjoiNDg3Nzc4IiwicCI6InB5aSIsInNpZyI6ImM0NGM4MmVmN2E2NDk2OGY2ZGY3ZTc1N2VjOTgxYWVkYjQ0NzhhZTMyNGZjZThkYzRiMDAwZjQ2MWYzZmQ4OGMiLCJ2IjoiMCIsImdpem1vX2lkIjpudWxsfQ==" alt="Cocina con lo que tienes" />
+        <img className="imagen mt-4" src="https://i.postimg.cc/cHfJVhHb/temp-Imagey0-A82-R.avif" alt="Cocina con lo que tienes" />
       </div>
-      <button type="button" class="btn btn-success boton">Empieza aqui!</button>
-      <div className="Funcionalidades container py-5">
+      <button type="button" class="btn btn-success button1">Empieza aqui!</button>
+      <div className="Functionalities container py-5">
         <p className="fs-1 text-center mb-4"><strong>Funcionalidades</strong></p>
         <div className="mb-4">
           <img className="symbol1" src="https://www.shutterstock.com/image-vector/green-chef-logo-design-template-260nw-2639161045.jpg"></img>
@@ -60,17 +60,17 @@ export const Home = () => {
             </div>
             <div class="carousel-inner">
               <div class="carousel-item active">
-                <img src="https://chatgpt.com/backend-api/public_content/enc/eyJpZCI6Im1fNjhhYjg0NDIwMzY4ODE5MThjZTA2YTVlZDUxMDg2MTA6ZmlsZV8wMDAwMDAwMDJiMjQ2MWY5OWVhYmMyMzA4YjhjMDdjMCIsInRzIjoiNDg3Nzk3IiwicCI6InB5aSIsInNpZyI6IjNmNDRjY2RhNmU1Y2IxM2Q4MDNmOWI1MmZlYTFjZmY3MWU0NzRmOTM2NDg4YzlhMjk1Yzc0OTkxMWI1YWQxZWQiLCJ2IjoiMCIsImdpem1vX2lkIjpudWxsfQ==" class="d-block w-100" alt="..." />
+                <img src="https://i.postimg.cc/90FvGPDk/temp-Image-JF3w1e.avif" class="d-block w-100" alt="..." />
                 <div class="carousel-caption d-none d-md-block">
                 </div>
               </div>
               <div class="carousel-item">
-                <img src="https://chatgpt.com/backend-api/public_content/enc/eyJpZCI6Im1fNjhhYjg0ZDNjMjQ0ODE5MTgwY2Q0NzAxMmVmNmVmN2Q6ZmlsZV8wMDAwMDAwMDI0ZTg2MWY2ODA2YjUwNzgyNWI1MDI1ZiIsInRzIjoiNDg3Nzk3IiwicCI6InB5aSIsInNpZyI6IjU0YTFlOWRmYWYxYWY3MGQ0N2ZhMTE3MzdiYWMzYTZmZDdlOGI0NTI0M2ZmMWMxNWUxMjk0NjU2NzQzMGY1OTYiLCJ2IjoiMCIsImdpem1vX2lkIjpudWxsfQ==" class="d-block w-100" alt="..." />
+                <img src="https://i.postimg.cc/tCFh30HL/temp-Image2-RPOSb.avif" class="d-block w-100" alt="..." />
                 <div class="carousel-caption d-none d-md-block">
                 </div>
               </div>
               <div class="carousel-item">
-                <img src="https://chatgpt.com/backend-api/public_content/enc/eyJpZCI6Im1fNjhhZDAyMjgxYjk0ODE5MTgxMWEyMzM0ZWVlYjAwYzM6ZmlsZV8wMDAwMDAwMGMyYzA2MWY4YjVkYjVhNjk0NzZjMmNlOCIsInRzIjoiNDg3ODI0IiwicCI6InB5aSIsInNpZyI6ImM5ZWQ2ZDY2NjA5M2ExOTZlNzI2ZDNmNTM4N2Y4NDg4MzlhNzg3ZTAwZDJiYzVkMDIzNTMxZWZkZTljOTZlYzMiLCJ2IjoiMCIsImdpem1vX2lkIjpudWxsfQ==" class="d-block w-100" alt="..." />
+                <img src="https://i.postimg.cc/QtZ79HKv/temp-Imageqt-CGYt.avif" class="d-block w-100" alt="..." />
                 <div class="carousel-caption d-none d-md-block">
                 </div>
               </div>
@@ -88,7 +88,7 @@ export const Home = () => {
       </div>
       <div>
       </div>
-      <div className="Como_Funciona container py-5 bg-light">
+      <div className="howItWorks container py-5 bg-light">
         <p className="fs-1 text-center mb-5"><strong>Como funciona?</strong></p>
         <div className="d-flex flex-column align-items-center">
           <img className="imagen1 mb-3" src="https://www.trasteros-madrid.com/wp-content/uploads/2022/05/como-organizar-despensa.jpg" alt="Organiza tu despensa" />
@@ -101,15 +101,27 @@ export const Home = () => {
           <p className="fs-3 text-center"><i>Cocina facil y disfruta</i></p>
         </div>
       </div>
-      <div className="Recetas">
+      <div className="Recipes">
         <div class="card">
-          <img src="..." class="card-img-top" alt="..." />
+          <img src="https://i.postimg.cc/kgbr77y5/temp-Image-SWM2vv.avif" class="card-img-top" alt="..." />
           <div class="card-body">
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
+            <p class="card-text">Espaguetis con salsa de carne y tomate, cubiertos con queso parmesano</p>
+          </div>
+        </div>
+        <div class="card card2">
+          <img src="https://i.postimg.cc/xd34d8N9/temp-Image-Tpb-SEH.avif" class="card-img-top" alt="..." />
+          <div class="card-body">
+            <p class="card-text">Pechuga de pollo dorada acompanada de papas y habichuelas verdes</p>
+          </div>
+        </div>
+         <div class="card card3">
+          <img src="https://i.postimg.cc/44jkqKz0/temp-Image9-Ftz7c.avif" class="card-img-top" alt="..." />
+          <div class="card-body">
+            <p class="card-text">Pollo sellado en sarten con salsa cremosa de champinones y perejil</p>
           </div>
         </div>
       </div>
-      <div className="Testimonios container py-5">
+      <div className="Testimonials container py-5">
         <p className="fs-1 text-center mb-4"><strong>Testimonios</strong></p>
         <div className="row">
           <div className="col-md-6 mb-4">
@@ -130,10 +142,16 @@ export const Home = () => {
               <p className="text-muted">_Laura</p>
             </div>
           </div>
+          <div className="col-md-6 mb-4">
+            <div className="bg-white p-3 rounded shadow">
+              <p className="fs-5">“Amo CookIA te hace la vida mas facil”</p>
+              <p className="text-muted">_Robert</p>
+            </div>
+          </div>
         </div>
       </div>
       <div className="CallToAction text-center bg-success text-white py-5">
-        <p className="fs-1"><strong>¡Empieza ahora!</strong></p>
+        <p className="fs-1"><strong>Empieza ahora!</strong></p>
         <p className="fs-4">Aprovecha lo que ya tienes en casa y deja que la cocina sea fácil</p>
         <button className="btn btn-light btn-lg mt-3">Registrar Ingredientes</button>
       </div>
