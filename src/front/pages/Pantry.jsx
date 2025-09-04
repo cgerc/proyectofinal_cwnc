@@ -158,14 +158,14 @@ function Pantry() {
                       onClick={() => saveEdit(food.id)}
                       aria-label="Guardar cambios"
                     >
-                      :floppy_disk:
+                      💾
                     </button>
                     <button
                       className="btn btn-secondary btn-sm"
                       onClick={() => setEditingFoodId(null)}
                       aria-label="Cancelar edición"
                     >
-                      :x:
+                      ❌
                     </button>
                   </div>
                 ) : (
@@ -195,7 +195,7 @@ function Pantry() {
                         onClick={() => removeFood(food.id)}
                         aria-label="Eliminar alimento"
                       >
-                        :wastebasket:
+                        🗑️
                       </button>
                     </div>
                   </>
