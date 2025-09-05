@@ -13,6 +13,7 @@ import Pantry from "./pages/Pantry";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import ProtectedRoute from "./components/ProtectedRoute";
+import Recipe from "./pages/Recipe";
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -32,7 +33,8 @@ export const router = createBrowserRouter(
       <Route path="/pantry" element={<ProtectedRoute><Pantry /></ProtectedRoute>} />
       <Route path="/register" element={<Register />} />
       <Route path="/login" element={<Login />} />
-      <Route path="/home" element={<Home />}/>
+      <Route path="/home" element={<Home />} />
+      <Route path="/recipe" element={<Recipe />} />
     </Route>
   )
 );
