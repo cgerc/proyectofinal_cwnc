@@ -4,6 +4,7 @@ import Generator from "../components/Generator.jsx"
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.bundle.min.js'
 import { use } from 'react';
+import Card from '../components/Card.jsx';
 
 
 function Recipe(props) {
@@ -30,6 +31,7 @@ function Recipe(props) {
                 <h2>Generate Recipes</h2>
                 <Generator foods={foods} />
             </div>
+            <Card />
             <div className="container text-success">
                 <h1>{props.name}</h1>
             </div>
