@@ -1,23 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import Generator from '../components/Generator.jsx';
+
 function Pantry() {
-
-  const [recipes, setRecipes] = useState(null);
-
-  const generateRecipes = async () => {
-    const ingredients = foods.map(food => food.label);
-    try {
-      const response = await fetch("http://localhost:3001/api/recipe", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ingredientes: ingredients })
-      });
-      const data = await response.json();
-      setRecipes(data);
-      console.log(data)
-    } catch (error) {
-      console.error("Error", error);
-    }
-  };
 
   const [data, setData] = useState('');
   const [foods, setFoods] = useState(() => {
@@ -208,17 +192,7 @@ function Pantry() {
           {foods.length} alimento{foods.length !== 1 ? 's' : ''} en la despensa
         </p>
       </div>
-      <div>
-        <button className='btn btn-success mt-3' onClick={generateRecipes}>
-          Generate Recipes
-        </button>
-        {recipes && (
-          <div className='mt-3'>
-            <h3>Suggested Recipes</h3>
-            <pre>{JSON.stringify(recipes, null, 2)}</pre>
-          </div>
-        )}
-      </div>
+      <Generator foods={foods} />
     </>
   );
 }
