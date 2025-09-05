@@ -8,11 +8,11 @@ import { use } from 'react';
 
 function Recipe(props) {
 
-    const [foods, setFoods] = useState([]);
+    const [foods, setFoods] = useState([]); // guardamos los alimentos
 
     useEffect(() => {
         const savedFoods = localStorage.getItem('pantryFoods');
-        setFoods(savedFoods ? JSON.parse(savedFoods) : []);
+        setFoods(savedFoods ? JSON.parse(savedFoods) : []); // si hay algun alimento, se guarda en local storage
     }, []);
 
 
