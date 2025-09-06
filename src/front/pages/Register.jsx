@@ -37,7 +37,7 @@ const Register = () => {
     return (
         <div className="text-center" style={{ maxWidth: "330px", margin: "auto", padding: "15px" }}>
             <form className="form-signin" onSubmit={handleUserSubmit}>
-                <h1 className="h3 mb-3 font-weight-normal">Registrarse</h1>
+                <h1 className="h3 mb-3 font-weight-normal">Crea tu cuenta gratuita</h1>
                 <label htmlFor="inputEmail" className="sr-only">Correo electrónico</label>
                 <input onChange={handleChange} name='email' type="email" id="inputEmail" className="form-control mb-3" placeholder="Email address" required="" autoFocus="" />
                 <label htmlFor="inputPassword" className="sr-only">Contraseña</label>
@@ -45,7 +45,14 @@ const Register = () => {
                 <label htmlFor="inputName" className="sr-only">Nombre completo</label>
                 <input onChange={handleChange} name='name' type="text" id="inputName" className="form-control mb-3" placeholder="Nombre completo" required="" />
                 <div className='d-flex align-items-center justify-content-center'>
-                    <a className="btn btn-lg btn-primary btn-block m-2" type="submit">Sign in</a>
+                    <a 
+                    href="#"
+                    className="btn btn-lg btn-primary btn-block m-2" 
+                    onClick={() => navigate('/pantry')}
+                    >
+                            Registrarse 
+                    </a>
+                    
                    
                 </div>
             </form>
