@@ -50,7 +50,7 @@ const Login= () => {
                             ¿Eres un usuario nuevo?{ ' '}
                             <span
                                 style={{
-                                    color: '#007bff'
+                                    color: '#007bff',
                                     cursor: 'pointer',
                                     textDecoration: 'none'
                                 }}
