@@ -25,14 +25,25 @@ const Register = () => {
         })
             .then(response => {
                 if (response.status === 200) {
-                    alert("User created successfully");
-                    navigate('/');
+                    alert("Usuario creado exitosamente");
+                    return response.json();
+                } else {
+                    throw new Error("Error en el registro");
                 }
-                return response.json();
             })
-            .then(data => alert(data.message))
-            .catch(err => console.error(err));
-    }
+                 .then(data => {
+                if (data.access_token) {
+                    localStorage.setItem('token', data.access_token); // Almacenar token
+                    navigate('/pantry'); // Redirigir a Pantry tras registro exitoso
+                } else {
+                    alert(data.message || "Error: No se recibió token");
+                }
+            })
+            .catch(err => {
+                console.error(err);
+                alert("Error durante el registro: " + err.message);
+            });
+    };
 
     return (
         <div className="text-center" style={{ maxWidth: "330px", margin: "auto", padding: "15px" }}>

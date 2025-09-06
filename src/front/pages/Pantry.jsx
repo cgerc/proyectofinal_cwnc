@@ -12,6 +12,23 @@ function Pantry() {
   const [editingFoodId, setEditingFoodId] = useState(null);
   const [editValue, setEditValue] = useState('');
   const [userName, setUserName] = useState('');
+
+useEffect(() => {
+  const token = localStorage.getItem('token');
+  if (token) {
+    try{
+      const decoded= jwtDecode(token);
+      setUserName(decoded.name || 'Usuario');
+    } catch (error) {
+      console.error('Error decodificando el token:', error);
+      setUserName('Usuario');
+    }
+  } else {
+    setUserName('Usuario');
+  }
+}, []);
+
+
   useEffect(() => {
     localStorage.setItem('pantryFoods', JSON.stringify(foods));
   }, [foods]);
