@@ -23,17 +23,24 @@ const Login = () => {
         })
             .then(response => {
                 if (response.status === 200) {
-                    alert("User logged in successfully");
+                    alert("Usuario inició sesión exitosamente");
+                    return response.json();
+                } else {
+                    throw new Error ("Error en el inicio de sesión");
                 }
-                return response.json();
             })
             .then(data => {
                 if (data.access_token) {
                     localStorage.setItem('token', data.access_token);
-                    navigate('/');
+                    navigate('/pantry');
+                } else {
+                    alert(data.message || "Error: No se recibió el token");
                 }
             })
-            .catch(error => console.log(error))
+            .catch(error => {
+                console.log(error);
+                alert("Error durante el inicio de sesión: "+ error.message);
+            });
     }
 
     return (

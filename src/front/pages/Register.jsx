@@ -33,8 +33,8 @@ const Register = () => {
             })
                  .then(data => {
                 if (data.access_token) {
-                    localStorage.setItem('token', data.access_token); // Almacenar token
-                    navigate('/pantry'); // Redirigir a Pantry tras registro exitoso
+                    localStorage.setItem('token', data.access_token); 
+                    navigate('/pantry'); 
                 } else {
                     alert(data.message || "Error: No se recibió token");
                 }
