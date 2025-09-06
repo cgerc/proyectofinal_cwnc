@@ -11,6 +11,7 @@ function Pantry() {
   });
   const [editingFoodId, setEditingFoodId] = useState(null);
   const [editValue, setEditValue] = useState('');
+  const [userName, setUserName] = useState('');
   useEffect(() => {
     localStorage.setItem('pantryFoods', JSON.stringify(foods));
   }, [foods]);
@@ -97,7 +98,8 @@ function Pantry() {
       {/* Jumbotron */}
       <div className="p-5 mb-4 bg-body-tertiary rounded-3">
         <div className="container-fluid py-5 d-flex flex-column align-items-center text-center">
-          <h1 className="display-5 fw-bold">Mi Despensa</h1>
+          <h1 className="display-5 fw-bold">¡Bienvenido a tu cuenta, {userName}!</h1>
+          <h1 className="display-5 fw-bold">Mi despensa</h1>
           <p className="col-md-8 fs-4">
             Ingresa los alimentos que tengas en tu despensa y recibe recetas adaptadas a ti
           </p>
