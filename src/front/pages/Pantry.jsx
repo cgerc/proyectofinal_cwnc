@@ -1,11 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import {useNavigate} from 'react-router-dom';
-import jwtDecode from 'jwt-decode';
-import Generator from '../components/Generator.jsx';
-
 
 function Pantry() {
-  const backendUrl= import.meta.env.VITE_BACKEND_URL || "http://localhost:5000";
   const [data, setData] = useState('');
   const [foods, setFoods] = useState(() => {
     // Cargar datod de localStorage al iniciar
@@ -14,50 +9,10 @@ function Pantry() {
   });
   const [editingFoodId, setEditingFoodId] = useState(null);
   const [editValue, setEditValue] = useState('');
-  const [userName, setUserName] = useState('');
-  const navigate= useNavigate();
 
-useEffect(() => {
-  const token = localStorage.getItem('token');
-  if (token) {
-    try{
-      const decoded= jwtDecode(token);
-      if (decoded.name){
-      setUserName(decoded.name);
-  } else {
-    fetch(`{backendUrl}/api/user/profile`, {
-      headers: {
-        'Authorization': `Bearer ${token}`,
-        'Content-Type': 'application/json'
-      }
-    })
-      .then(response => {
-        if(response.ok) {
-          return response.json();
-        }
-        throw new Error('Error al obtener el perfil de usuario');
-      })
-      .then(data=>{
-        setUserName(data.name || 'Usuario');
-      })
-      .catch(error => {
-        console.error('Error al obtener el perfil del usuario:', error);
-      });
-      }
-    } catch (error) {
-      console.error('Error decodificando el token:', error);
-      setUserName('Usuario');
-    }
-  } else {
-      setUserName('Usuario');
-      navigate('/login');
-  }
-}, [navigate]);
-
-useEffect(() => {
+  useEffect(() => {
     localStorage.setItem('pantryFoods', JSON.stringify(foods));
-}, [foods]);
-
+  }, [foods]);
 
   const incrementQuantity = (id) => {
     setFoods((prev) =>
@@ -66,6 +21,7 @@ useEffect(() => {
       )
     );
   };
+
   const decrementQuantity = (id) => {
     setFoods((prev) =>
       prev.map((food) =>
@@ -75,16 +31,19 @@ useEffect(() => {
       )
     );
   };
+
   const handleChange = (event) => {
     console.log('Valor del input:', event.target.value);
     setData(event.target.value);
   };
+
   const handleKeyPress = (event) => {
     if (event.key === 'Enter') {
       event.preventDefault();
       addFood();
     }
   };
+
   const addFood = () => {
     console.log('Agregando alimento:', data);
     if (data.trim()) {
@@ -106,6 +65,7 @@ useEffect(() => {
       setData('');
     }
   };
+
   const removeFood = (id) => {
     setFoods((prev) => prev.filter((alimento) => alimento.id !== id));
     if (editingFoodId === id) {
@@ -113,13 +73,16 @@ useEffect(() => {
       setEditValue('');
     }
   };
+
   const startEditing = (food) => {
     setEditingFoodId(food.id);
     setEditValue(food.label); // Cargar el valor actual en el input de edición
   };
+
   const handleEditChange = (event) => {
     setEditValue(event.target.value); // Actualizar el valor del input de edición
   };
+
   const saveEdit = (id) => {
     if (editValue.trim()) {
       setFoods((prev) =>
@@ -131,26 +94,31 @@ useEffect(() => {
     setEditingFoodId(null); // Salir del modo de edición
     setEditValue('');
   };
+
   const handleEditKeyPress = (event, id) => {
     if (event.key === 'Enter') {
       event.preventDefault();
       saveEdit(id);
     }
   };
+
   return (
     <>
       {/* Jumbotron */}
       <div className="p-5 mb-4 bg-body-tertiary rounded-3">
         <div className="container-fluid py-5 d-flex flex-column align-items-center text-center">
-          <h1 className="display-5 fw-bold">¡Bienvenido a tu cuenta, {userName}!</h1>
-          <h1 className="display-5 fw-bold">Mi despensa</h1>
+          <h1 className="display-5 fw-bold">Mi Despensa</h1>
           <p className="col-md-8 fs-4">
             Ingresa los alimentos que tengas en tu despensa y recibe recetas adaptadas a ti
           </p>
+
         </div>
       </div>
+
+
       <div className="d-flex flex-column align-items-center mt-3">
         <h2>Alimentos en tu despensa</h2>
+
         <div className="mb-3 w-50">
           <input
             className="form-control"
@@ -162,6 +130,7 @@ useEffect(() => {
             placeholder="Agregar alimento"
           />
         </div>
+
         <ul className="list-group w-50 shadow-lg">
           {foods.length === 0 ? (
             <li className="list-group-item text-muted">
@@ -197,7 +166,9 @@ useEffect(() => {
                     >
                       ❌
                     </button>
+
                   </div>
+
                 ) : (
                   <>
                     <span
@@ -213,6 +184,7 @@ useEffect(() => {
                       >
                         +
                       </button>
+
                       <button className="btn btn-outline-primary btn-sm me-2"
                         onClick={() => decrementQuantity(food.id)}
                         aria-label="Disminuir cantidad"
@@ -220,6 +192,7 @@ useEffect(() => {
                       >
                         -
                       </button>
+
                       <button
                         className="btn btn-danger btn-sm ms-auto"
                         onClick={() => removeFood(food.id)}
@@ -237,9 +210,10 @@ useEffect(() => {
         <p className="text-muted text-center mt-3">
           {foods.length} alimento{foods.length !== 1 ? 's' : ''} en la despensa
         </p>
+
       </div>
-      <Generator foods={foods} />
     </>
   );
 }
+
 export default Pantry;

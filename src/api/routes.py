@@ -9,8 +9,6 @@ from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
 
 
-
-
 api = Blueprint('api', __name__)
 
 # Allow CORS requests to this API
@@ -86,30 +84,5 @@ def get_all_users():
     return jsonify(users), 200
 
 # agregar funcion para validar el token cuando caduque
-@api.route('/token/validate', methods=['GET'])
-@jwt_required()
-def validate_token():
-    try:
-        email = get_jwt_identity()
-        user = User.query.filter_by(email=email).first()
-        if user is None:
-            return jsonify({"message": "Usuario no encontrado"}), 404
-        return jsonify({"message": "Token válido", "user": user.serialize()}), 200
-    except Exception as e:
-        return jsonify({"message": "Token inválido o expirado", "error": str(e)}), 401
 
-        #obtener nombre de usuario en mensaje de bienvenida de mi despensa
-
-@api.route('/user/pantry', methods=['GET'])
-@jwt_required()
-def get_user_pantry():
-    email = get_jwt_identity()
-    user = User.query.filter_by(email=email).first()
-    if user is None:
-        return jsonify({"message": "Usuario no encontrado"}), 404
-    return jsonify({
-        "name": user.name,
-        "email": user.email,
-      
-    }), 200
-
+ # obtener nombre de usuario en mensaje de bienvenida de mi despensa
