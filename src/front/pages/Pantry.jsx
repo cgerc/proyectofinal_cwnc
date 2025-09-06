@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import {useNavigate} from 'react-router-dom';
+import jwtDecode from 'jwt-decode';
 import Generator from '../components/Generator.jsx';
 
-function Pantry() {
 
+function Pantry() {
+  const backendUrl= import.meta.env.VITE_BACKEND_URL || "http://localhost:5000";
   const [data, setData] = useState('');
   const [foods, setFoods] = useState(() => {
     // Cargar datod de localStorage al iniciar
@@ -12,26 +15,50 @@ function Pantry() {
   const [editingFoodId, setEditingFoodId] = useState(null);
   const [editValue, setEditValue] = useState('');
   const [userName, setUserName] = useState('');
+  const navigate= useNavigate();
 
 useEffect(() => {
   const token = localStorage.getItem('token');
   if (token) {
     try{
       const decoded= jwtDecode(token);
-      setUserName(decoded.name || 'Usuario');
+      if (decoded.name){
+      setUserName(decoded.name);
+  } else {
+    fetch(`{backendUrl}/api/user/profile`, {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(response => {
+        if(response.ok) {
+          return response.json();
+        }
+        throw new Error('Error al obtener el perfil de usuario');
+      })
+      .then(data=>{
+        setUserName(data.name || 'Usuario');
+      })
+      .catch(error => {
+        console.error('Error al obtener el perfil del usuario:', error);
+      });
+      }
     } catch (error) {
       console.error('Error decodificando el token:', error);
       setUserName('Usuario');
     }
   } else {
-    setUserName('Usuario');
+      setUserName('Usuario');
+      navigate('/login');
   }
-}, []);
+}, [navigate]);
 
-
-  useEffect(() => {
+useEffect(() => {
     localStorage.setItem('pantryFoods', JSON.stringify(foods));
-  }, [foods]);
+}, [foods]);
+
+
   const incrementQuantity = (id) => {
     setFoods((prev) =>
       prev.map((food) =>
