@@ -5,19 +5,19 @@ import Recipe from "../pages/Recipe";
 export const Navbar = () => {
     return (
         <ul className="nav justify-content-end nav">
-            <li className="nav-item ">
-                <Link to="/home">
-                    <a className="nav-link active text-success " aria-current="page" href="#">Home</a>
+            <li className="nav-item">
+                <Link to="/home" className="nav-link text-success">
+                    Home
                 </Link>
             </li>
             <li className="nav-item">
-                <Link to="/pantry">
-                    <a className="nav-link text-success " href="#">Mi despensa</a>
+                <Link to="/pantry" className="nav-link text-success">
+                    Mi despensa
                 </Link>
             </li>
             <li className="nav-item">
-                <Link to="/recipe">
-                    <a className="nav-link text-success" href="#">Mis recetas</a>
+                <Link to="/recipe" className="nav-link text-success">
+                    Mis recetas
                 </Link>
             </li>
 
