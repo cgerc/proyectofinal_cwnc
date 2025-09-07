@@ -13,7 +13,7 @@ function Recipe() {
     const [recipes, setRecipes] = useState(null); // guardamos las recetas generadas
 
     useEffect(() => {
-        const savedFoods = localStorage.getItem('pantryFoods');
+        const savedFoods = sessionStorage.getItem('pantryFoods');
         setFoods(savedFoods ? JSON.parse(savedFoods) : []); // si hay algun alimento, se guarda en local storage
     }, []);
 

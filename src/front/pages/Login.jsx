@@ -31,7 +31,7 @@ const Login = () => {
             })
             .then(data => {
                 if (data.access_token) {
-                    localStorage.setItem('token', data.access_token);
+                    sessionStorage.setItem('token', data.access_token);
                     navigate('/');
                 }
             })
