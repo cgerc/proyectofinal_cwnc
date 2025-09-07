@@ -7,9 +7,10 @@ import { use } from 'react';
 import Card from '../components/Card.jsx';
 
 
-function Recipe(props) {
+function Recipe() {
 
     const [foods, setFoods] = useState([]); // guardamos los alimentos
+    const [recipes, setRecipes] = useState(null); // guardamos las recetas generadas
 
     useEffect(() => {
         const savedFoods = localStorage.getItem('pantryFoods');
@@ -27,13 +28,17 @@ function Recipe(props) {
                         style={{ height: "25vh", objectFit: "cover" }} />
                 </div>
             </div>
+
             <div className='d-flex justify-content-center mt-3'>
                 <h2>Generate Recipes</h2>
-                <Generator foods={foods} />
+                <Generator foods={foods} setRecipes={setRecipes} />
             </div>
+            {/* 
             <Card />
+            */}
+
             <div className="container text-success">
-                <h1>{props.name}</h1>
+                <h1>{recipes ? recipes.titulo : null}</h1>
             </div>
             <div className="row">
                 <div className='col-md-6 col-sm-12 border-end border-success border-3 px-3'>

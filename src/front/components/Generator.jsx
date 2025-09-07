@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
-const Generator = ({ foods }) => {
-    const [recipes, setRecipes] = useState(null);
+const Generator = ({ foods, setRecipes }) => {
+    // const [recipes, setRecipes] = useState(null);
 
     const generateRecipes = async () => {
         const ingredients = foods.map(food => food.label);
@@ -24,12 +24,12 @@ const Generator = ({ foods }) => {
             <button className='btn btn-success mt-3' onClick={generateRecipes}>
                 Generate Recipes
             </button>
-            {recipes && (
+            {/* {recipes && (
                 <div className='mt-3'>
                     <h3>Suggested Recipes</h3>
-                    <pre>{JSON.stringify(recipes, null, 2)}</pre>
+                    <p>{JSON.stringify(recipes, null, 2)}</p>
                 </div>
-            )}
+            )} */}
         </div>
     );
 };
