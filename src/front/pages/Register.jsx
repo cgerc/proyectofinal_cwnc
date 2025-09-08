@@ -25,29 +25,46 @@ const Register = () => {
         })
             .then(response => {
                 if (response.status === 200) {
-                    alert("User created successfully");
-                    navigate('/');
+                    alert("Usuario creado exitosamente");
+                    return response.json();
+                } else {
+                    throw new Error("Error en el registro");
                 }
-                return response.json();
             })
-            .then(data => alert(data.message))
-            .catch(err => console.error(err));
-    }
+                 .then(data => {
+                if (data.access_token) {
+                    localStorage.setItem('token', data.access_token); 
+                    navigate('/pantry'); 
+                } else {
+                    alert(data.message || "Error: No se recibió token");
+                }
+            })
+            .catch(err => {
+                console.error(err);
+                alert("Error durante el registro: " + err.message);
+            });
+    };
 
     return (
         <div className="text-center" style={{ maxWidth: "330px", margin: "auto", padding: "15px" }}>
             <form className="form-signin" onSubmit={handleUserSubmit}>
-                <h1 className="h3 mb-3 font-weight-normal">Please sign in</h1>
-                <label htmlFor="inputEmail" className="sr-only">Email address</label>
-                <input onChange={handleChange} name='email' type="email" id="inputEmail" className="form-control" placeholder="Email address" required="" autoFocus="" />
-                <label htmlFor="inputPassword" className="sr-only">Password</label>
-                <input onChange={handleChange} name='password' type="password" id="inputPassword" className="form-control" placeholder="Password" required="" />
-                <label htmlFor="inputName" className="sr-only">Name</label>
-                <input onChange={handleChange} name='name' type="text" id="inputName" className="form-control" placeholder="Name" required="" />
+                <h1 className="h3 mb-3 font-weight-normal">Crea tu cuenta gratuita</h1>
+                <label htmlFor="inputEmail" className="sr-only">Correo electrónico</label>
+                <input onChange={handleChange} name='email' type="email" id="inputEmail" className="form-control mb-3" placeholder="Email address" required="" autoFocus="" />
+                <label htmlFor="inputPassword" className="sr-only">Contraseña</label>
+                <input onChange={handleChange} name='password' type="password" id="inputPassword" className="form-control mb-3" placeholder="Password" required="" />
+                <label htmlFor="inputName" className="sr-only">Nombre completo</label>
+                <input onChange={handleChange} name='name' type="text" id="inputName" className="form-control mb-3" placeholder="Nombre completo" required="" />
                 <div className='d-flex align-items-center justify-content-center'>
-                    <button className="btn btn-lg btn-primary btn-block m-2" type="submit">Sign in</button>
-                    <p>or</p>
-                    <button className="btn btn-lg btn-danger btn-block m-2" onClick={() => navigate('/login')}>Log in</button>
+                    <a 
+                    href="#"
+                    className="btn btn-lg btn-primary btn-block m-2" 
+                    onClick={() => navigate('/pantry')}
+                    >
+                            Registrarse 
+                    </a>
+                    
+                   
                 </div>
             </form>
         </div >

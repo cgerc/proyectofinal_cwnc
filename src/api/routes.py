@@ -9,8 +9,6 @@ from src.api.utils import generate_sitemap, APIException
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
 
 
-
-
 api = Blueprint('api', __name__)
 
 # Allow CORS requests to this API
@@ -87,3 +85,4 @@ def get_all_users():
 
 # agregar funcion para validar el token cuando caduque
 
+ # obtener nombre de usuario en mensaje de bienvenida de mi despensa
