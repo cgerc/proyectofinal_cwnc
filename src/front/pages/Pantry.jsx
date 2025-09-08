@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import Generator from '../components/Generator.jsx';
 
 function Pantry() {
-
   const [data, setData] = useState('');
   const [foods, setFoods] = useState(() => {
     // Cargar datod de localStorage al iniciar
@@ -11,9 +9,11 @@ function Pantry() {
   });
   const [editingFoodId, setEditingFoodId] = useState(null);
   const [editValue, setEditValue] = useState('');
+
   useEffect(() => {
     localStorage.setItem('pantryFoods', JSON.stringify(foods));
   }, [foods]);
+
   const incrementQuantity = (id) => {
     setFoods((prev) =>
       prev.map((food) =>
@@ -21,6 +21,7 @@ function Pantry() {
       )
     );
   };
+
   const decrementQuantity = (id) => {
     setFoods((prev) =>
       prev.map((food) =>
@@ -30,16 +31,19 @@ function Pantry() {
       )
     );
   };
+
   const handleChange = (event) => {
     console.log('Valor del input:', event.target.value);
     setData(event.target.value);
   };
+
   const handleKeyPress = (event) => {
     if (event.key === 'Enter') {
       event.preventDefault();
       addFood();
     }
   };
+
   const addFood = () => {
     console.log('Agregando alimento:', data);
     if (data.trim()) {
@@ -61,6 +65,7 @@ function Pantry() {
       setData('');
     }
   };
+
   const removeFood = (id) => {
     setFoods((prev) => prev.filter((alimento) => alimento.id !== id));
     if (editingFoodId === id) {
@@ -68,13 +73,16 @@ function Pantry() {
       setEditValue('');
     }
   };
+
   const startEditing = (food) => {
     setEditingFoodId(food.id);
     setEditValue(food.label); // Cargar el valor actual en el input de edición
   };
+
   const handleEditChange = (event) => {
     setEditValue(event.target.value); // Actualizar el valor del input de edición
   };
+
   const saveEdit = (id) => {
     if (editValue.trim()) {
       setFoods((prev) =>
@@ -86,25 +94,31 @@ function Pantry() {
     setEditingFoodId(null); // Salir del modo de edición
     setEditValue('');
   };
+
   const handleEditKeyPress = (event, id) => {
     if (event.key === 'Enter') {
       event.preventDefault();
       saveEdit(id);
     }
   };
+
   return (
     <>
       {/* Jumbotron */}
       <div className="p-5 mb-4 bg-body-tertiary rounded-3">
         <div className="container-fluid py-5 d-flex flex-column align-items-center text-center">
-          <h1 className="display-5 fw-bold">Mi Despensa</h1>
+          <h1 className="display-5 fw-bold">¡Bienvenido a Mi Despensa!</h1>
           <p className="col-md-8 fs-4">
             Ingresa los alimentos que tengas en tu despensa y recibe recetas adaptadas a ti
           </p>
+
         </div>
       </div>
+
+
       <div className="d-flex flex-column align-items-center mt-3">
         <h2>Alimentos en tu despensa</h2>
+
         <div className="mb-3 w-50">
           <input
             className="form-control"
@@ -116,6 +130,7 @@ function Pantry() {
             placeholder="Agregar alimento"
           />
         </div>
+
         <ul className="list-group w-50 shadow-lg">
           {foods.length === 0 ? (
             <li className="list-group-item text-muted">
@@ -151,7 +166,9 @@ function Pantry() {
                     >
                       ❌
                     </button>
+
                   </div>
+
                 ) : (
                   <>
                     <span
@@ -167,6 +184,7 @@ function Pantry() {
                       >
                         +
                       </button>
+
                       <button className="btn btn-outline-primary btn-sm me-2"
                         onClick={() => decrementQuantity(food.id)}
                         aria-label="Disminuir cantidad"
@@ -174,6 +192,7 @@ function Pantry() {
                       >
                         -
                       </button>
+
                       <button
                         className="btn btn-danger btn-sm ms-auto"
                         onClick={() => removeFood(food.id)}
@@ -191,9 +210,10 @@ function Pantry() {
         <p className="text-muted text-center mt-3">
           {foods.length} alimento{foods.length !== 1 ? 's' : ''} en la despensa
         </p>
+
       </div>
-      <Generator foods={foods} />
     </>
   );
 }
+
 export default Pantry;
