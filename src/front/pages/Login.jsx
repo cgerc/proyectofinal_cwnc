@@ -1,9 +1,11 @@
 import React from 'react';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate} from 'react-router-dom';
+// import useGlobalReducer from '../hooks/useGlobalReducer.jsx'//
 
 const Login = () => {
-    const backendUrl = import.meta.env.VITE_BACKEND_URL  || "https://verbose-spork-v6w67jq66j66cp76v-3001.app.github.dev/";
+    // const {dispatch}= useGlobalReducer ()//
+    const backendUrl = import.meta.env.VITE_BACKEND_URL || "https://verbose-spork-v6w67jq66j66cp76v-3001.app.github.dev/";
     console.log(backendUrl)
     const [user, setUser] = useState({
         email: "", password: ""
@@ -35,6 +37,9 @@ const Login = () => {
             .then(data => {
                 if (data.access_token) {
                     localStorage.setItem('token', data.access_token);
+                    console.log(data)
+                    //dispatch({type:"setUser",payload:data.user})
+                    
                     navigate('/pantry');
                 } else {
                     alert(data.message || "Error: No se recibió el token");

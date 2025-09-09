@@ -25,7 +25,11 @@ export default function storeReducer(store, action = {}) {
         ...store,
         token: action.payload
       };
-      
+    // case 'setUser':
+    //   return{
+    //     ...store,
+    //     user: action.payload
+    //   }
     case 'add_task':
 
       const { id,  color } = action.payload
