@@ -6,7 +6,7 @@ export const Navbar = () => {
     const navigate = useNavigate();
 
     const handleLogout = () => {
-        sessionStorage.removeItem("token");
+        localStorage.removeItem("token");
         navigate("/login");
         alert("Logged out successfully");
     };
@@ -25,7 +25,12 @@ export const Navbar = () => {
             </li>
             <li className="nav-item">
                 <Link to="/recipe" className="nav-link text-success">
-                    Mis recetas
+                    Generar Recetas
+                </Link>
+            </li>
+            <li className="nav-item">
+                <Link to="/" className="nav-link text-success">
+                    AQUI VAN LOS FAV
                 </Link>
             </li>
 

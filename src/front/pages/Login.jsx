@@ -52,7 +52,7 @@ const Login = () => {
                 <label htmlFor="inputPassword" className="sr-only">cONTRASEÑA</label>
                 <input onChange={handleChange} name='password' type="password" id="inputPassword" className="form-control mb-3" placeholder="Contraseña" required="" />
                 <div className='d-flex align-items-center justify-content-center flex-column'>
-                    <a className="btn btn-lg btn-primary btn-block" type="subtmit">Iniciar sesión</a>
+                    <button className="btn btn-lg btn-primary btn-block" type="submit">Iniciar sesión</button>
                     <p className="mt-3">
                         ¿Eres un usuario nuevo?{' '}
                         <span

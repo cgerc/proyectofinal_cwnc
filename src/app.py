@@ -34,7 +34,8 @@ agent = Agent(
         "Responde SIEMPRE con un JSON válido.",
         "Genera una receta de cocina a solo con los ingredientes que te doy y que la preparacion sea detallada",
         "Usa solo los ingredientes proporcionados por el usuario; no agregues otros. Si falta algo esencial, indícalo en los ingredientes como sugerencia opcional.",
-        "Responde en formato json con los campos: titulo, ingredientes (lista) y preparacion (lista), dificultad (con una puntuacion entre 1-5), y tiempo estimado de la preparacion.",
+        "Responde en formato json con los campos: titulo, ingredientes (lista) y preparacion (lista), dificultad (con una puntuacion entre 1-5), y tiempo_estimado de la preparacion.",
+        "IMPORTANTE: Genera siempre una receta diferente y creativa. No repitas la misma receta. Varía el estilo de cocina, técnicas de preparación, o combinaciones de ingredientes.",
         #"Devuelve un objeto con la clave 'opciones', que sea una lista de exactamente 3 recetas.",
         "Escribe en español y NO añadas texto fuera del JSON."
         ],
@@ -48,15 +49,40 @@ def ap_recipes():
     ingredients = payload.get("ingredientes", [])
     if not ingredients:
         return jsonify({"error": "No se proporcionaron ingredientes"}), 400
+    
+    # Añadir variabilidad para evitar repetir recetas
+    import random
+    cooking_styles = ["casera", "gourmet", "rápida", "saludable", "tradicional", "moderna", "mediterránea", "asiática"]
+    random_style = random.choice(cooking_styles)
+    
     mensaje = {
         "role": "user",
-        "content": f"genera recetas con estos ingredientes: {', '.join(ingredients)}"
+        "content": f"genera una receta {random_style} con estos ingredientes: {', '.join(ingredients)}. Asegúrate de que sea diferente y creativa."
     }
     # Lógica para generar recetas a partir de los ingredientes
     response = agent.run(mensaje)
 
-    data = response.content # aaaaaaaaaaaaa
+    data = response.content
     print(data)
+    
+    # Si la respuesta viene envuelta en markdown, extraer solo el JSON
+    if isinstance(data, str):
+        if data.startswith('```json') and data.endswith('```'):
+            # Extraer el JSON del markdown
+            json_start = data.find('{')
+            json_end = data.rfind('}') + 1
+            if json_start != -1 and json_end > json_start:
+                try:
+                    import json
+                    data = json.loads(data[json_start:json_end])
+                except json.JSONDecodeError:
+                    return jsonify({"error": "Error parsing AI response"}), 500
+        else:
+            try:
+                import json
+                data = json.loads(data)
+            except json.JSONDecodeError:
+                return jsonify({"error": "Invalid JSON response from AI"}), 500
 
     return jsonify(data), 200
 
