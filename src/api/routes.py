@@ -10,9 +10,9 @@ from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identi
 
 
 api = Blueprint('api', __name__)
-
+CORS(api, resources={r"/*": {"origins": "*"}})
 # Allow CORS requests to this API
-CORS(api)
+#(api)
 
 
 @api.route('/hello', methods=['POST', 'GET'])
@@ -84,5 +84,6 @@ def get_all_users():
     return jsonify(users), 200
 
 # agregar funcion para validar el token cuando caduque
+
 
  # obtener nombre de usuario en mensaje de bienvenida de mi despensa

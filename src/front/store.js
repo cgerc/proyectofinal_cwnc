@@ -12,16 +12,18 @@ export const initialStore=()=>{
         title: "Do my homework",
         background: null,
       }
-    ]
+    ],
+    token: null,
+    user: [],
   }
 }
 
 export default function storeReducer(store, action = {}) {
   switch(action.type){
-    case 'set_hello':
+    case 'set_token':
       return {
         ...store,
-        message: action.payload
+        token: action.payload
       };
       
     case 'add_task':

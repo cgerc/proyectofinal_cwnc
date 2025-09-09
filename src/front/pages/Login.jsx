@@ -17,13 +17,14 @@ const Login = () => {
     const handleUserSubmit = (e) => {
         e.preventDefault();
         fetch(`${backendUrl}/api/user/login`, {
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 'Content-Type': 'application/json'},
             body: JSON.stringify(user),
             method: 'POST'
         })
             .then(response => {
                 if (response.status === 200) {
                     alert("Usuario inició sesión exitosamente");
+                    
                     return response.json();
                 } else {
                     throw new Error ("Error en el inicio de sesión");

@@ -10,6 +10,8 @@ function Pantry() {
   const [editingFoodId, setEditingFoodId] = useState(null);
   const [editValue, setEditValue] = useState('');
 
+
+
   useEffect(() => {
     localStorage.setItem('pantryFoods', JSON.stringify(foods));
   }, [foods]);
