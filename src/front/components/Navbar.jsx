@@ -1,8 +1,17 @@
 import { Link } from "react-router-dom";
-import { Home } from "../pages/Home";
-import Recipe from "../pages/Recipe";
+import useGlobalReducer from "../hooks/useGlobalReducer";
 
 export const Navbar = () => {
+
+    const { store, dispatch } = useGlobalReducer()
+
+
+    const logout = () => {
+        localStorage.clear()
+        dispatch({ type: "logout", payload: {} })
+
+    }
+
     return (
         <ul className="nav justify-content-end nav">
             <li className="nav-item ">
@@ -22,10 +31,21 @@ export const Navbar = () => {
             </li>
 
             <li>
-                <Link to="/login">
-                    <button className="btn btn-primary " type="button" style={{ backgroundColor: '#03C329', color: 'white' }}>Login</button>
-                </Link>
+                {
+                    store.token == null ?
+                        <>
+                            < Link to="/login">
+                                <button className="btn btn-primary " type="button" style={{ backgroundColor: '#03C329', color: 'white' }}>Login</button>
+                            </Link>
+                        </> :
+
+                        <button className="btn btn-primary " type="button" style={{ backgroundColor: 'red', color: 'white' }}
+                            onClick={() => logout()}>Logout</button>
+
+
+                }
+
             </li>
-        </ul>
+        </ul >
     );
 };

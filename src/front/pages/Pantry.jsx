@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import useGlobalReducer from '../hooks/useGlobalReducer';
 
 function Pantry() {
   const [data, setData] = useState('');
@@ -10,7 +11,7 @@ function Pantry() {
   const [editingFoodId, setEditingFoodId] = useState(null);
   const [editValue, setEditValue] = useState('');
 
-
+  const { store } = useGlobalReducer()
 
   useEffect(() => {
     localStorage.setItem('pantryFoods', JSON.stringify(foods));
@@ -109,7 +110,7 @@ function Pantry() {
       {/* Jumbotron */}
       <div className="p-5 mb-4 bg-body-tertiary rounded-3">
         <div className="container-fluid py-5 d-flex flex-column align-items-center text-center">
-          <h1 className="display-5 fw-bold">¡Bienvenido a Mi Despensa!</h1>
+          <h1 className="display-5 fw-bold">¡Bienvenido {store.user.name} a Mi Despensa!</h1>
           <p className="col-md-8 fs-4">
             Ingresa los alimentos que tengas en tu despensa y recibe recetas adaptadas a ti
           </p>
