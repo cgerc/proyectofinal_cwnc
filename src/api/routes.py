@@ -98,6 +98,7 @@ def get_name():
     user = User.query.filter_by(email=user_id).first()
 
     if not user:
-        return jsonify({'msg': 'Usuario no encontrado'}), 401
+     return jsonify({'msg': 'Usuario no encontrado'}), 401
 
     return jsonify({'msg': 'Bienvenido :' + user.name}), 200
+                        
