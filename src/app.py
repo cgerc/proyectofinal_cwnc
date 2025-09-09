@@ -11,7 +11,6 @@ from dotenv import load_dotenv
 from phi.agent import Agent
 from phi.model.openai import OpenAIChat
 import os, json
-from flask_cors import CORS
 from api.utils import APIException, generate_sitemap
 from api.models import db
 from api.routes import api

@@ -1,10 +1,10 @@
 import React from 'react';
 import { useState } from 'react';
-import { useNavigate} from 'react-router-dom';
-// import useGlobalReducer from '../hooks/useGlobalReducer.jsx'//
+import { useNavigate } from 'react-router-dom';
+import useGlobalReducer from '../hooks/useGlobalReducer.jsx'//
 
 const Login = () => {
-    // const {dispatch}= useGlobalReducer ()//
+    const { store, dispatch } = useGlobalReducer()//
     const backendUrl = import.meta.env.VITE_BACKEND_URL || "https://verbose-spork-v6w67jq66j66cp76v-3001.app.github.dev/";
     console.log(backendUrl)
     const [user, setUser] = useState({
@@ -27,8 +27,9 @@ const Login = () => {
             .then(response => {
                 console.log("aqui esta la respuesta")
                 if (response.status === 200) {
-                    alert("Usuario inició sesión exitosamente");
+                    // alert("Usuario inició sesión exitosamente");
 
+                    navigate("/pantry")
                     return response.json();
                 } else {
                     throw new Error("Error en el inicio de sesión");
@@ -37,9 +38,13 @@ const Login = () => {
             .then(data => {
                 if (data.access_token) {
                     localStorage.setItem('token', data.access_token);
+                    localStorage.setItem('user', JSON.stringify(data.user));
+
+
                     console.log(data)
-                    //dispatch({type:"setUser",payload:data.user})
-                    
+                    dispatch({ type: "setUser", payload: data.user })
+                    dispatch({ type: "set_login", payload: data.access_token })
+
                     navigate('/pantry');
                 } else {
                     alert(data.message || "Error: No se recibió el token");
