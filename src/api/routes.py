@@ -61,6 +61,7 @@ def create_user():
 def login():
     email = request.json.get("email")
     password = request.json.get("password")
+    print("email: " + email)
     if email is None or password is None:
         return jsonify({"message": "Email and password are required"}), 400
     user = User.query.filter_by(email=email).first()
@@ -87,3 +88,14 @@ def get_all_users():
 
 
  # obtener nombre de usuario en mensaje de bienvenida de mi despensa
+@api.route('/getName', methods=['GET'])
+@jwt_required()
+def get_name():
+    user_id = get_jwt_identity()
+    user = User.query.filter_by(email=user_id).first()
+
+    if not user:
+        return jsonify({'msg': 'Usuario no encontrado'}), 401
+
+
+    return jsonify({'msg': 'Bienvenido :' + user.name}), 200

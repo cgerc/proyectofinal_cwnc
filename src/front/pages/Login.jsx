@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
     const backendUrl = import.meta.env.VITE_BACKEND_URL || "http://localhost:5000";
+    console.log(backendUrl)
     const [user, setUser] = useState({
         email: "", password: ""
     });
@@ -17,17 +18,18 @@ const Login = () => {
     const handleUserSubmit = (e) => {
         e.preventDefault();
         fetch(`${backendUrl}/api/user/login`, {
-            headers: { 'Content-Type': 'application/json'},
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(user),
             method: 'POST'
         })
             .then(response => {
+                console.log("aqui esta la respuesta")
                 if (response.status === 200) {
                     alert("Usuario inició sesión exitosamente");
-                    
+
                     return response.json();
                 } else {
-                    throw new Error ("Error en el inicio de sesión");
+                    throw new Error("Error en el inicio de sesión");
                 }
             })
             .then(data => {
@@ -40,7 +42,7 @@ const Login = () => {
             })
             .catch(error => {
                 console.log(error);
-                alert("Error durante el inicio de sesión: "+ error.message);
+                alert("Error durante el inicio de sesión: " + error.message);
             });
     }
 
