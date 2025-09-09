@@ -12,7 +12,7 @@ from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identi
 api = Blueprint('api', __name__)
 CORS(api, resources={r"/*": {"origins": "*"}})
 # Allow CORS requests to this API
-#(api)
+# (api)
 
 
 @api.route('/hello', methods=['POST', 'GET'])
@@ -64,11 +64,13 @@ def login():
     print("email: " + email)
     if email is None or password is None:
         return jsonify({"message": "Email and password are required"}), 400
+    print("texto cualquera")
     user = User.query.filter_by(email=email).first()
     if user is None:
         return jsonify({"message": "User does not exist"}), 400
     if not bcrypt.check_password_hash(user.password, password):
         return jsonify({"message": "Invalid password"}), 400
+    print("otro cualquera")
     access_token = create_access_token(identity=email)
     # user.access_token = access_token
     db.session.commit()
@@ -86,8 +88,9 @@ def get_all_users():
 
 # agregar funcion para validar el token cuando caduque
 
-
  # obtener nombre de usuario en mensaje de bienvenida de mi despensa
+
+
 @api.route('/getName', methods=['GET'])
 @jwt_required()
 def get_name():
@@ -96,6 +99,5 @@ def get_name():
 
     if not user:
         return jsonify({'msg': 'Usuario no encontrado'}), 401
-
 
     return jsonify({'msg': 'Bienvenido :' + user.name}), 200

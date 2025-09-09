@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
-    const backendUrl = import.meta.env.VITE_BACKEND_URL || "http://localhost:5000";
+    const backendUrl = import.meta.env.VITE_BACKEND_URL  || "https://verbose-spork-v6w67jq66j66cp76v-3001.app.github.dev/";
     console.log(backendUrl)
     const [user, setUser] = useState({
         email: "", password: ""
@@ -17,7 +17,7 @@ const Login = () => {
 
     const handleUserSubmit = (e) => {
         e.preventDefault();
-        fetch(`${backendUrl}/api/user/login`, {
+        fetch(`${backendUrl}api/user/login`, {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(user),
             method: 'POST'
@@ -55,7 +55,7 @@ const Login = () => {
                 <label htmlFor="inputPassword" className="sr-only">cONTRASEÑA</label>
                 <input onChange={handleChange} name='password' type="password" id="inputPassword" className="form-control mb-3" placeholder="Contraseña" required="" />
                 <div className='d-flex align-items-center justify-content-center flex-column'>
-                    <a className="btn btn-lg btn-primary btn-block" type="subtmit">Iniciar sesión</a>
+                    <button className="btn btn-lg btn-primary btn-block" type="submit">Iniciar sesión</button>
                     <p className="mt-3">
                         ¿Eres un usuario nuevo?{' '}
                         <span

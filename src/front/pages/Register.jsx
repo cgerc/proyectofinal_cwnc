@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 
 const Register = () => {
-    const backendUrl = import.meta.env.VITE_BACKEND_URL || "http://localhost:5000";
+    const backendUrl = import.meta.env.VITE_BACKEND_URL || "https://verbose-spork-v6w67jq66j66cp76v-3001.app.github.dev/";
     const [user, setUser] = useState({
         email: "", password: "", name: ""
     });
@@ -18,7 +18,7 @@ const Register = () => {
 
     const handleUserSubmit = (e) => {
         e.preventDefault();
-        fetch(`${backendUrl}/api/user`, {
+        fetch(`${backendUrl}api/user`, {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(user),
             method: 'POST'
@@ -31,10 +31,10 @@ const Register = () => {
                     throw new Error("Error en el registro");
                 }
             })
-                 .then(data => {
+            .then(data => {
                 if (data.access_token) {
-                    localStorage.setItem('token', data.access_token); 
-                    navigate('/pantry'); 
+                    localStorage.setItem('token', data.access_token);
+                    navigate('/pantry');
                 } else {
                     alert(data.message || "Error: No se recibió token");
                 }
@@ -56,15 +56,16 @@ const Register = () => {
                 <label htmlFor="inputName" className="sr-only">Nombre completo</label>
                 <input onChange={handleChange} name='name' type="text" id="inputName" className="form-control mb-3" placeholder="Nombre completo" required="" />
                 <div className='d-flex align-items-center justify-content-center'>
-                    <a 
-                    href="#"
-                    className="btn btn-lg btn-primary btn-block m-2" 
-                    onClick={() => navigate('/pantry')}
+                    <button
+                        href="#"
+                        className="btn btn-lg btn-primary btn-block m-2 " type="submit"
+
                     >
-                            Registrarse 
-                    </a>
-                    
-                   
+                        Registrarse
+
+                    </button>
+
+
                 </div>
             </form>
         </div >
