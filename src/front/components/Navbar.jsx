@@ -1,4 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
+
 import useGlobalReducer from "../hooks/useGlobalReducer";
 
 export const Navbar = () => {
@@ -12,25 +13,32 @@ export const Navbar = () => {
         navigate('/login');
     }
 
+
     return (
         <ul className="nav justify-content-end nav">
-            <li className="nav-item ">
-                <Link to="/home">
-                    <a className="nav-link active text-success " aria-current="page" href="#">Home</a>
+            <li className="nav-item">
+                <Link to="/home" className="nav-link text-success">
+                    Home
                 </Link>
             </li>
             <li className="nav-item">
-                <Link to="/pantry">
-                    <a className="nav-link text-success " href="#">Mi despensa</a>
+                <Link to="/pantry" className="nav-link text-success">
+                    Mi despensa
                 </Link>
             </li>
             <li className="nav-item">
-                <Link to="/recipe">
-                    <a className="nav-link text-success" href="#">Mis recetas</a>
+                <Link to="/recipe" className="nav-link text-success">
+                    Generar Recetas
+                </Link>
+            </li>
+            <li className="nav-item">
+                <Link to="/" className="nav-link text-success">
+                    AQUI VAN LOS FAV
                 </Link>
             </li>
 
             <li>
+
                 {
                     store.token == null ?
                         <>
@@ -45,6 +53,7 @@ export const Navbar = () => {
 
 
                 }
+
 
             </li>
         </ul >
