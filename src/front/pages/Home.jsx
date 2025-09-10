@@ -1,6 +1,7 @@
 import React, { useEffect } from "react"
 import rigoImageUrl from "../assets/img/rigo-baby.jpg";
 import useGlobalReducer from "../hooks/useGlobalReducer.jsx";
+import { Link } from "react-router-dom";
 export const Home = () => {
   const { store, dispatch } = useGlobalReducer()
   const loadMessage = async () => {
@@ -28,7 +29,11 @@ export const Home = () => {
         <p className="fs-4 p1">Escribe tus ingredientes y recibe<br />recetas al instante, sin complicaciones</p>
         <img className="imagen mt-4" src="https://i.postimg.cc/cHfJVhHb/temp-Imagey0-A82-R.avif" alt="Cocina con lo que tienes" />
       </div>
-      <button type="button" class="btn btn-success button1">Empieza aqui!</button>
+      <Link to="/random">
+      <button type="button" class="btn btn-success button1">Empieza aqui!
+      </button>
+      </Link>
+      
       <div className="Functionalities container py-5">
         <p className="fs-1 text-center mb-4"><strong>Funcionalidades</strong></p>
         <div className="mb-4">

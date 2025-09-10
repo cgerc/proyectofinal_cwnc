@@ -12,12 +12,12 @@ from phi.agent import Agent
 from phi.model.openai import OpenAIChat
 import os, json
 from flask_cors import CORS
-from src.api.utils import APIException, generate_sitemap
-from src.api.models import db
-from src.api.routes import api
-from src.api.admin import setup_admin
-from src.api.commands import setup_commands
-from src.api.extensions import jwt
+from api.utils import APIException, generate_sitemap
+from api.models import db
+from api.routes import api
+from api.admin import setup_admin
+from api.commands import setup_commands
+from api.extensions import jwt
 
 app = Flask(__name__)
 
