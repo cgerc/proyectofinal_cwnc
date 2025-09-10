@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import useGlobalReducer from '../hooks/useGlobalReducer';
+import pantryImg from "./imagen/pantry.png";
 
 function Pantry() {
-
   const [data, setData] = useState('');
   const [foods, setFoods] = useState(() => {
-    // Cargar datod de localStorage al iniciar
+    // Cargar datos de localStorage al iniciar
     const savedFoods = localStorage.getItem('pantryFoods');
     return savedFoods ? JSON.parse(savedFoods) : [];
   });
   const [editingFoodId, setEditingFoodId] = useState(null);
   const [editValue, setEditValue] = useState('');
 
-  const { store } = useGlobalReducer()
+  const { store } = useGlobalReducer();
 
   useEffect(() => {
     localStorage.setItem('pantryFoods', JSON.stringify(foods));
@@ -105,20 +105,27 @@ function Pantry() {
       saveEdit(id);
     }
   };
-  console.log(store.user)
+
+  console.log(store.user);
   return (
     <>
       {/* Jumbotron */}
       <div className="p-5 mb-4 bg-body-tertiary rounded-3">
         <div className="container-fluid py-5 d-flex flex-column align-items-center text-center">
           <h1 className="display-5 fw-bold">¡Bienvenido {store.user.name} a Mi Despensa!</h1>
+          <div className="container my-5">
+          <img
+            src={pantryImg}
+            alt="jumbotron-imagen"
+            className="img-fluid rounded w-100"
+            style={{ objectFit: 'cover', height: '100%', position: 'absolute', top: 0, left: 0, zIndex: -1 }}
+          />
+          </div>
           <p className="col-md-8 fs-4">
             Ingresa los alimentos que tengas en tu despensa y recibe recetas adaptadas a ti
           </p>
-
         </div>
       </div>
-
 
       <div className="d-flex flex-column align-items-center mt-3">
         <h2>Alimentos en tu despensa</h2>
@@ -170,9 +177,7 @@ function Pantry() {
                     >
                       ❌
                     </button>
-
                   </div>
-
                 ) : (
                   <>
                     <span
@@ -182,21 +187,21 @@ function Pantry() {
                       {food.label} ({food.quantity || 1})
                     </span>
                     <div className="d-flex align-items-center">
-                      <button className="btn btn-outline-primary btn-sm me-2"
+                      <button
+                        className="btn btn-outline-primary btn-sm me-2"
                         onClick={() => incrementQuantity(food.id)}
                         aria-label="Aumentar cantidad"
                       >
                         +
                       </button>
-
-                      <button className="btn btn-outline-primary btn-sm me-2"
+                      <button
+                        className="btn btn-outline-primary btn-sm me-2"
                         onClick={() => decrementQuantity(food.id)}
                         aria-label="Disminuir cantidad"
                         disabled={(food.quantity || 1) <= 1}
                       >
                         -
                       </button>
-
                       <button
                         className="btn btn-danger btn-sm ms-auto"
                         onClick={() => removeFood(food.id)}
@@ -214,7 +219,6 @@ function Pantry() {
         <p className="text-muted text-center mt-3">
           {foods.length} alimento{foods.length !== 1 ? 's' : ''} en la despensa
         </p>
-
       </div>
     </>
   );
