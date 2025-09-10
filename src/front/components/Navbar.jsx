@@ -1,15 +1,15 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useGlobalReducer from "../hooks/useGlobalReducer";
 
 export const Navbar = () => {
 
     const { store, dispatch } = useGlobalReducer()
-
+    const navigate = useNavigate();
 
     const logout = () => {
         localStorage.clear()
         dispatch({ type: "logout", payload: {} })
-
+        navigate('/login');
     }
 
     return (
@@ -41,6 +41,7 @@ export const Navbar = () => {
 
                         <button className="btn btn-primary " type="button" style={{ backgroundColor: 'red', color: 'white' }}
                             onClick={() => logout()}>Logout</button>
+
 
 
                 }

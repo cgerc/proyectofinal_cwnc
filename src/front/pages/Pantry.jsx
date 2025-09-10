@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import useGlobalReducer from '../hooks/useGlobalReducer';
 
 function Pantry() {
+
   const [data, setData] = useState('');
   const [foods, setFoods] = useState(() => {
     // Cargar datod de localStorage al iniciar
@@ -104,7 +105,7 @@ function Pantry() {
       saveEdit(id);
     }
   };
-
+  console.log(store.user)
   return (
     <>
       {/* Jumbotron */}

@@ -35,7 +35,7 @@ export default function storeReducer(store, action = {}) {
         ...store,
         token: action.payload,
       };
-
+   
     case "logout":
       return {
         ...store,

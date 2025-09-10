@@ -1,10 +1,12 @@
 import React from 'react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import useGlobalReducer from '../hooks/useGlobalReducer.jsx'//
 
 
 const Register = () => {
-    const backendUrl = import.meta.env.VITE_BACKEND_URL || "https://verbose-spork-v6w67jq66j66cp76v-3001.app.github.dev/";
+    const { store, dispatch } = useGlobalReducer()
+    const backendUrl = import.meta.env.VITE_BACKEND_URL
     const [user, setUser] = useState({
         email: "", password: "", name: ""
     });
@@ -24,18 +26,28 @@ const Register = () => {
             method: 'POST'
         })
             .then(response => {
+                console.log(response)
                 if (response.status === 200) {
+
                     alert("Usuario creado exitosamente");
+
                     return response.json();
                 } else {
                     throw new Error("Error en el registro");
                 }
             })
             .then(data => {
+                console.log(data)
                 if (data.access_token) {
                     localStorage.setItem('token', data.access_token);
+                    localStorage.setItem('user', JSON.stringify(data.user));
+
+                    dispatch({ type: "setUser", payload: data.user })
+                    dispatch({ type: "set_login", payload: data.access_token })
                     navigate('/pantry');
+
                 } else {
+
                     alert(data.message || "Error: No se recibió token");
                 }
             })

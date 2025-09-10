@@ -4,8 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import useGlobalReducer from '../hooks/useGlobalReducer.jsx'//
 
 const Login = () => {
-    const { store, dispatch } = useGlobalReducer()//
-    const backendUrl = import.meta.env.VITE_BACKEND_URL || "https://verbose-spork-v6w67jq66j66cp76v-3001.app.github.dev/";
+    const { store, dispatch } = useGlobalReducer()
+    const backendUrl = import.meta.env.VITE_BACKEND_URL
     console.log(backendUrl)
     const [user, setUser] = useState({
         email: "", password: ""
@@ -36,6 +36,7 @@ const Login = () => {
                 }
             })
             .then(data => {
+                console.log(data)
                 if (data.access_token) {
                     localStorage.setItem('token', data.access_token);
                     localStorage.setItem('user', JSON.stringify(data.user));

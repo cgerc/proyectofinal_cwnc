@@ -50,11 +50,12 @@ def create_user():
     # hashed password
     hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
     user.password = hashed_password
+    access_token = create_access_token(identity=email)
 
     db.session.add(user)
     db.session.commit()
 
-    return jsonify({"message": "User created"}), 200
+    return jsonify({"access_token": access_token, "user": user.serialize()}), 200
 
 
 @api.route('/user/login', methods=['POST'])
@@ -98,7 +99,6 @@ def get_name():
     user = User.query.filter_by(email=user_id).first()
 
     if not user:
-     return jsonify({'msg': 'Usuario no encontrado'}), 401
+        return jsonify({'msg': 'Usuario no encontrado'}), 401
 
     return jsonify({'msg': 'Bienvenido :' + user.name}), 200
-                        
