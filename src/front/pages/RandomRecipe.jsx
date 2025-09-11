@@ -32,13 +32,20 @@ function RandomRecipe() {
       tiempo: 45,
       dificultad: "media",
     },
-     {
+    {
       titulo: "Huevos revueltos con espinacas",
       ingredientes: ["2 huevos", "Un puñado de espinacas", "Sal, pimienta y aceite de oliva"],
       tiempo: 20,
       dificultad: "fácil",
     },
+    {
+      titulo: "Tostadas con aguacate y tomate",
+      ingredientes: ["2 rebanadas de pan", "1 aguacate", "1 tomate maduro", "Sal, pimienta y aceite de oliva"],
+      tiempo: 15,
+      dificultad: "fácil"
+    }
     
+
   ];
 
 
@@ -53,7 +60,7 @@ function RandomRecipe() {
   return (
     <div className="generator">
       <h1 className="titulo"> Generador de recetas random</h1>
-      <button onClick={generarReceta}>Sorpréndeme con un platillo</button>
+      <button className="surprise" onClick={generarReceta}>Sorpréndeme con un platillo</button>
 
       {receta && (
         <div>
@@ -69,7 +76,7 @@ function RandomRecipe() {
           </p>
         </div>
       )}
-       </div>
+    </div>
   );
 }
 

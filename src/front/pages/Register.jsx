@@ -33,8 +33,9 @@ const Register = () => {
 
                     return response.json();
                 } else {
-                    throw new Error("Error en el registro");
-                }
+                     throw new Error("Error en el registro");
+                     
+                };
             })
             .then(data => {
                 console.log(data)

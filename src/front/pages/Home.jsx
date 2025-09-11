@@ -39,7 +39,7 @@ export const Home = () => {
         <img className="imagen mt-4" src="https://i.postimg.cc/cHfJVhHb/temp-Imagey0-A82-R.avif" alt="Cocina con lo que tienes" />
       </div>
       <Link to="/random">
-      <button type="button" class="btn btn-success button1">Empieza aqui!
+      <button type="button" class="btn btn-success button1">Recetas Random!
       </button>
       </Link>
       

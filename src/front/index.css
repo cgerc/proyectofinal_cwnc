@@ -50,6 +50,10 @@ body {
   color: white;
 
 }
+.surprise{
+  background: linear-gradient(135deg, #28a745 0%, #218838 100%);
+  color: white;
+}
 
 .titulo{
   font-family: 'Courier New', Courier, monospace;
