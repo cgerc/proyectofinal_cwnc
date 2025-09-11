@@ -1,15 +1,18 @@
 import { Link, useNavigate } from "react-router-dom";
-import { Home } from "../pages/Home";
-import Recipe from "../pages/Recipe";
+
+import useGlobalReducer from "../hooks/useGlobalReducer";
 
 export const Navbar = () => {
+
+    const { store, dispatch } = useGlobalReducer()
     const navigate = useNavigate();
 
-    const handleLogout = () => {
-        sessionStorage.removeItem("token");
-        navigate("/login");
-        alert("Logged out successfully");
-    };
+    const logout = () => {
+        localStorage.clear()
+        dispatch({ type: "logout", payload: {} })
+        navigate('/login');
+    }
+
 
     return (
         <ul className="nav justify-content-end nav">
@@ -25,18 +28,34 @@ export const Navbar = () => {
             </li>
             <li className="nav-item">
                 <Link to="/recipe" className="nav-link text-success">
-                    Mis recetas
+                    Generar Recetas
+                </Link>
+            </li>
+            <li className="nav-item">
+                <Link to="/" className="nav-link text-success">
+                    AQUI VAN LOS FAV
                 </Link>
             </li>
 
             <li>
-                <Link to="/login">
-                    <button className="btn btn-primary " type="button" style={{ backgroundColor: '#03C329', color: 'white' }}>Login</button>
-                </Link>
-                <Link to="/">
-                    <button className="btn btn-danger mx-2" type="button" onClick={handleLogout}>Logout</button>
-                </Link>
+
+                {
+                    store.token == null ?
+                        <>
+                            < Link to="/login">
+                                <button className="btn btn-primary " type="button" style={{ backgroundColor: '#03C329', color: 'white' }}>Login</button>
+                            </Link>
+                        </> :
+
+                        <button className="btn btn-primary " type="button" style={{ backgroundColor: 'red', color: 'white' }}
+                            onClick={() => logout()}>Logout</button>
+
+
+
+                }
+
+
             </li>
-        </ul>
+        </ul >
     );
 };
