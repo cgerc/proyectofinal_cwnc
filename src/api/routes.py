@@ -7,6 +7,7 @@ from flask_cors import CORS
 from src.api.extensions import bcrypt
 from src.api.utils import generate_sitemap, APIException
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
+from src.api.agent import generate_recipe
 
 
 api = Blueprint('api', __name__)
@@ -86,3 +87,25 @@ def get_all_users():
 # agregar funcion para validar el token cuando caduque
 
  # obtener nombre de usuario en mensaje de bienvenida de mi despensa
+
+
+@api.route('/generate-recipe', methods=['POST'])
+def handle_generate_recipe():
+    try:
+        data = request.json
+        
+        ingredients = data.get('ingredients', '')
+        customization = data.get('customization', '')
+        
+        if not ingredients:
+            return jsonify({"error": "Se requieren ingredientes"}), 400
+        
+        result = generate_recipe(ingredients, customization)
+        
+        if "error" in result:
+            return jsonify(result), 500
+            
+        return jsonify(result), 200
+        
+    except Exception as e:
+        return jsonify({"error": f"Error interno del servidor: {str(e)}"}), 500
