@@ -19,7 +19,7 @@ const Login = () => {
 
     const handleUserSubmit = (e) => {
         e.preventDefault();
-        fetch(`${backendUrl}api/user/login`, {
+        fetch(`${backendUrl}/api/user/login`, {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(user),
             method: 'POST'
