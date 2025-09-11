@@ -38,11 +38,11 @@ export const Home = () => {
         <p className="fs-4 p1">Escribe tus ingredientes y recibe<br />recetas al instante, sin complicaciones</p>
         <img className="imagen mt-4" src="https://i.postimg.cc/cHfJVhHb/temp-Imagey0-A82-R.avif" alt="Cocina con lo que tienes" />
       </div>
-      <Link to="/random">
-      <button type="button" class="btn btn-success button1">Recetas Random!
-      </button>
+      <Link to="/recipe" >
+        <button type="button" class="btn btn-success button1 mx-4">Recetas!
+        </button>
       </Link>
-      
+
       <div className="Functionalities container py-5">
         <p className="fs-1 text-center mb-4"><strong>Funcionalidades</strong></p>
         <div className="mb-4">
@@ -167,7 +167,9 @@ export const Home = () => {
       <div className="CallToAction text-center bg-success text-white py-5">
         <p className="fs-1"><strong>Empieza ahora!</strong></p>
         <p className="fs-4">Aprovecha lo que ya tienes en casa y deja que la cocina sea fácil</p>
-        <button className="btn btn-light btn-lg mt-3">Registrar Ingredientes</button>
+        <Link to="/pantry" >
+          <button className="btn btn-light btn-lg mt-3">Registrar Ingredientes</button>
+        </Link>
       </div>
       <footer className="bg-dark text-white py-4 mt-5">
         <div className="container text-center">

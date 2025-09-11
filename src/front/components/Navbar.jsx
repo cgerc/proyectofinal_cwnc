@@ -32,8 +32,8 @@ export const Navbar = () => {
                 </Link>
             </li>
             <li className="nav-item">
-                <Link to="/" className="nav-link text-success">
-                    AQUI VAN LOS FAV
+                <Link to="/favorites" className="nav-link text-success">
+                    Favoritos
                 </Link>
             </li>
 

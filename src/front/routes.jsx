@@ -15,6 +15,7 @@ import Login from "./pages/Login";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Recipe from "./pages/Recipe";
 import RandomRecipe from "./pages/RandomRecipe";
+import Favorites from "./pages/Favorites";
 
 
 export const router = createBrowserRouter(
@@ -37,8 +38,9 @@ export const router = createBrowserRouter(
       <Route path="/login" element={<Login />} />
       <Route path="/home" element={<Home />} />
       <Route path="/recipe" element={<Recipe />} />
-      <Route path="/random" element={<RandomRecipe/>} />
-    
+      <Route path="/random" element={<RandomRecipe />} />
+      <Route path="/favorites" element={<ProtectedRoute><Favorites /></ProtectedRoute>} />
+
     </Route>
   )
 );
