@@ -1,9 +1,9 @@
 
 from flask import Flask, request, jsonify, url_for, Blueprint
-from src.api.models import db, User
+from api.models import db, User
 from flask_cors import CORS
-from src.api.extensions import bcrypt
-from src.api.utils import generate_sitemap, APIException
+from api.extensions import bcrypt
+from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
 
 
