@@ -4,10 +4,21 @@ import pantryImg from "./imagen/pantry.png";
 
 function Pantry() {
   const [data, setData] = useState('');
+<<<<<<< HEAD
   const [foods, setFoods] = useState(() => {
     // Cargar datos de localStorage al iniciar
     const savedFoods = localStorage.getItem('pantryFoods');
     return savedFoods ? JSON.parse(savedFoods) : [];
+=======
+  const [customPrompt, setCustomPrompt] = useState('');
+  const [customConditions, setCustomConditions] = useState(() => {
+    const savedConditions = localStorage.getItem('customConditions'); // vamos a leer si hay alguna condicion guardada en el local storage
+    return savedConditions ? JSON.parse(savedConditions) : []; // si hay alguna condicion, lo convertimos a JSON, si no hay condicion se devuelve un array vacio
+  });
+  const [foods, setFoods] = useState(() => {     // Cargar datod de localStorage al iniciar
+    const savedFoods = localStorage.getItem('pantryFoods'); // vamos a ller si hay algun alimento guardado en local storage
+    return savedFoods ? JSON.parse(savedFoods) : [];  // si hay alimentos, lo convertimos a JSON, si no, devolvemos un array vacio
+>>>>>>> feature/condition-for-recipes
   });
   const [editingFoodId, setEditingFoodId] = useState(null);
   const [editValue, setEditValue] = useState('');
@@ -17,6 +28,10 @@ function Pantry() {
   useEffect(() => {
     localStorage.setItem('pantryFoods', JSON.stringify(foods));
   }, [foods]);
+
+  useEffect(() => {
+    localStorage.setItem('customConditions', JSON.stringify(customConditions));
+  }, [customConditions]);
 
   const incrementQuantity = (id) => {
     setFoods((prev) =>
@@ -39,6 +54,30 @@ function Pantry() {
   const handleChange = (event) => {
     console.log('Valor del input:', event.target.value);
     setData(event.target.value);
+  };
+
+  const handleCustomPromptChange = (event) => {
+    setCustomPrompt(event.target.value); // actualizamos el estado de customPrompt
+  };
+
+  const handleCustomPromptKeyPress = (event) => {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      addCustomCondition(); // Agregamosn la condicion cuando se presione enter
+    }
+  };
+
+  // Funcion para agregar una condicion personalizada
+  const addCustomCondition = () => {
+    if (customPrompt) {
+      setCustomConditions(prev => [...prev, customPrompt]); // agregamos una condicion a las condiciones que ya estaban
+      setCustomPrompt('');
+    }
+  };
+
+  // Funcion para eliminar una condicion personalizada
+  const removeCustomCondition = (condition) => {
+    setCustomConditions(prev => prev.filter(c => c !== condition)); //filtramos las condiciones y eliminamos la que no queremos, condition representa cada condicion que tengams en el array, osea quiero quedarme con todos las condiciones que sean distintas a la que quiero borrar
   };
 
   const handleKeyPress = (event) => {
@@ -124,6 +163,45 @@ function Pantry() {
           <p className="col-md-8 fs-4">
             Ingresa los alimentos que tengas en tu despensa y recibe recetas adaptadas a ti
           </p>
+<<<<<<< HEAD
+=======
+
+          <div className="mb-3 w-50">
+            <label className="form-label text-start w-100">
+              <strong>Personaliza tu experiencia:</strong>
+            </label>
+            <input
+              className="form-control bg-success-subtle"
+              type="text"
+              name="customPrompt"
+              value={customPrompt}
+              onChange={handleCustomPromptChange}
+              onKeyDown={handleCustomPromptKeyPress}
+              placeholder="Escribe una condición y presiona Enter (ej: sin gluten, vegetariano...)"
+            />
+
+            {/* Chips de condiciones */}
+            {customConditions.length > 0 && (
+              <div className="mt-2">
+                {customConditions.map((condition, index) => (
+                  <span key={index} className="badge bg-success me-2 mb-1">
+                    {condition}
+                    <button
+                      type="button"
+                      className="btn-close btn-close-white ms-2"
+                      style={{ fontSize: '0.7em' }}
+                      onClick={() => removeCustomCondition(condition)}
+                      aria-label="Eliminar condición"
+                    />
+                  </span>
+                ))}
+              </div>
+            )}
+          </div>
+
+
+
+>>>>>>> feature/condition-for-recipes
         </div>
       </div>
 
