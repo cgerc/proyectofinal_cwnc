@@ -122,3 +122,38 @@ def serve_any_other_file(path):
 if __name__ == '__main__':
     PORT = int(os.environ.get('PORT', 3001))
     app.run(host='0.0.0.0', port=PORT, debug=True)
+
+#CRUD
+#POST +
+#GET +
+#PUT
+#DELETE
+class Task(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(120))           
+    description = db.Column(db.String(250))     
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "title": self.title,
+            "description": self.description
+        }
+
+# GET all tasks
+@app.route('/api/tasks', methods=['GET'])
+def get_tasks():
+    tasks = Task.query.all()
+    result = []
+    for t in tasks:
+        result.append(t.serialize())
+    return jsonify(result)
+
+# POST create a task
+@app.route('/api/task', methods=['POST'])
+def create_task():
+    data = request.get_json()
+    new = Task(title=data.get('title'), description=data.get('description'))
+    db.session.add(new)
+    db.session.commit()
+    return jsonify({"message": "task created"}), 201
