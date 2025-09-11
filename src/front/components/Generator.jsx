@@ -10,7 +10,7 @@ const Generator = ({ foods, setRecipes }) => {
     // Cargar condiciones personalizadas de localStorage
     useEffect(() => {
         const savedConditions = localStorage.getItem('customConditions');
-        setCustomConditions(savedConditions ? JSON.parse(savedConditions) : []);
+        setCustomConditions(savedConditions ? JSON.parse(savedConditions) : []); // si savedCondition no es null, transformarlo a JSON
     }, []);
 
     const generateRecipes = async () => {
@@ -100,14 +100,12 @@ const Generator = ({ foods, setRecipes }) => {
 
             <div className="d-flex gap-2">
                 <button className='btn btn-success mt-3' onClick={generateRecipes}>
-                    🍳 Generar Recetas
-                    {customConditions.length > 0 && (
-                        <small className="d-block">con condiciones personalizadas</small>
-                    )}
+                    Generar Recetas
+                    {customConditions.length > 0}
                 </button>
                 {currentRecipe && (
                     <button className='btn btn-outline-success mt-3' onClick={saveRecipe}>
-                        ⭐ Guardar Favorito
+                        ★ Guardar Favorito
                     </button>
                 )}
             </div>
@@ -120,7 +118,7 @@ const Generator = ({ foods, setRecipes }) => {
                         {allRecipeOptions.map((recipe, index) => (
                             <button
                                 key={index}
-                                className={`btn btn-sm ${currentRecipe === recipe ? 'btn-success' : 'btn-outline-success'}`}
+                                className={`btn btn-sm ${currentRecipe === recipe ? 'btn-success' : 'btn-outline-success'}`} //currentRecipe es la receta que se esta mostrando? si lo es btn-success. si no lo es btn-outline-success
                                 onClick={() => selectRecipe(recipe, index)}
                             >
                                 Receta {index + 1}

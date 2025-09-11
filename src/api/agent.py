@@ -4,6 +4,9 @@ import os
 from dotenv import load_dotenv
 import json
 
+# Por temas de buenas practicas, dejaremos el agente en 
+# este archivo por separado para no combinar
+# la logica del agente con la logica de la aplicacion <3 
 
 load_dotenv() 
 
@@ -34,34 +37,23 @@ agent = Agent(
         "Ejemplo de formato: {'opciones': [{'titulo': 'Nombre', 'ingredientes': ['ing1', 'ing2'], 'preparacion': ['paso1', 'paso2'], 'dificultad': 3, 'tiempo_estimado': '25 minutos'}]}"
         ],
     show_tool_calls=True,
-    markdown=True, 
+    markdown=False, 
 )
 
+# Funcion para generar recetas con una seleccion inteligente de ingredientes!!
+# No se puede dejar todo en un prompt base, se tiene que entregar el contexto a poco para que arme bien la respuesta
+# Es una inyeccion de informacion al prompt base
 def generate_recipe(ingredients, customization=None):
-    """Función simple para generar recetas con selección inteligente de ingredientes"""
-    prompt = f"Ingredientes disponibles en la despensa: {ingredients}. "
-    prompt += "Selecciona SOLO los ingredientes que necesites para cada receta, no uses todos. "
+    prompt = f"Ingredientes disponibles en la despensa: {ingredients}. " # con esto estamos inyectando los ingredientes al string del prompt, para eso sirve la f
+    prompt += "Selecciona SOLO los ingredientes que necesites para cada receta, no uses todos. " # agregar mas texto al prompt
     prompt += "Crea 3 recetas diferentes, cada una usando una combinación distinta de ingredientes."
     
     if customization:
-        prompt += f" Requisitos especiales del usuario: {customization}"
+        prompt += f" Requisitos especiales del usuario: {customization}" # con esto igual estamos inyectando las condiciones al prompot
     
     try:
         response = agent.run(prompt)
         content = response.content
-        
-        # Si la respuesta viene en markdown, extraer solo el JSON
-        if isinstance(content, str):
-            if content.startswith('```json') and content.endswith('```'):
-                # Extraer el JSON del markdown
-                json_start = content.find('{')
-                json_end = content.rfind('}') + 1
-                if json_start != -1 and json_end > json_start:
-                    content = content[json_start:json_end]
-            elif content.startswith('```') and content.endswith('```'):
-                # Remover cualquier envoltorio de markdown
-                lines = content.split('\n')
-                content = '\n'.join(lines[1:-1])
         
         # Parsear el JSON
         data = json.loads(content)

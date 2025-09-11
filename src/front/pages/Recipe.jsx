@@ -45,21 +45,19 @@ function Recipe() {
 
     return (
         <div>
-            <div className='row'>
-                <div className='col-12'>
-                    <img src="https://i.postimg.cc/ncmqWbKz/Chat-GPT-Image-Aug-20-2025-04-00-31-PM.png"
-                        alt="Recipe"
-                        className="recipe-img"
-                        style={{ height: "25vh", objectFit: "cover" }} />
+            <div className="p-5 mb-4 bg-success-subtle rounded-3">
+                <div className="container-fluid py-5 d-flex flex-column align-items-center text-center">
+                    <h1 className="display-5 fw-bold">Comienza a explorar recetas!</h1>
+                </div>
+                <div className='d-flex justify-content-center mt-3'>
+                    <div className="text-center">
+                        <h2 className="text-success">Generar Recetas</h2>
+                        <Generator foods={foods} setRecipes={setRecipes} />
+                    </div>
                 </div>
             </div>
 
-            <div className='d-flex justify-content-center mt-3'>
-                <div className="text-center">
-                    <h2 className="text-success">Generar Recetas</h2>
-                    <Generator foods={foods} setRecipes={setRecipes} />
-                </div>
-            </div>
+
             {/* 
             <Card />
             */}
