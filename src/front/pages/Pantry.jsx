@@ -4,12 +4,6 @@ import pantryImg from "./imagen/pantry.png";
 
 function Pantry() {
   const [data, setData] = useState('');
-<<<<<<< HEAD
-  const [foods, setFoods] = useState(() => {
-    // Cargar datos de localStorage al iniciar
-    const savedFoods = localStorage.getItem('pantryFoods');
-    return savedFoods ? JSON.parse(savedFoods) : [];
-=======
   const [customPrompt, setCustomPrompt] = useState('');
   const [customConditions, setCustomConditions] = useState(() => {
     const savedConditions = localStorage.getItem('customConditions'); // vamos a leer si hay alguna condicion guardada en el local storage
@@ -18,7 +12,6 @@ function Pantry() {
   const [foods, setFoods] = useState(() => {     // Cargar datod de localStorage al iniciar
     const savedFoods = localStorage.getItem('pantryFoods'); // vamos a ller si hay algun alimento guardado en local storage
     return savedFoods ? JSON.parse(savedFoods) : [];  // si hay alimentos, lo convertimos a JSON, si no, devolvemos un array vacio
->>>>>>> feature/condition-for-recipes
   });
   const [editingFoodId, setEditingFoodId] = useState(null);
   const [editValue, setEditValue] = useState('');
@@ -153,18 +146,16 @@ function Pantry() {
         <div className="container-fluid py-5 d-flex flex-column align-items-center text-center">
           <h1 className="display-5 fw-bold">¡Bienvenido {store.user.name} a Mi Despensa!</h1>
           <div className="container my-5">
-          <img
-            src={pantryImg}
-            alt="jumbotron-imagen"
-            className="img-fluid rounded w-100"
-            style={{ objectFit: 'cover', height: '100%', position: 'absolute', top: 0, left: 0, zIndex: -1 }}
-          />
+            <img
+              src={pantryImg}
+              alt="jumbotron-imagen"
+              className="img-fluid rounded w-100"
+              style={{ objectFit: 'cover', height: '100%', position: 'absolute', top: 0, left: 0, zIndex: -1 }}
+            />
           </div>
           <p className="col-md-8 fs-4">
             Ingresa los alimentos que tengas en tu despensa y recibe recetas adaptadas a ti
           </p>
-<<<<<<< HEAD
-=======
 
           <div className="mb-3 w-50">
             <label className="form-label text-start w-100">
@@ -201,7 +192,6 @@ function Pantry() {
 
 
 
->>>>>>> feature/condition-for-recipes
         </div>
       </div>
 

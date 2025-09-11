@@ -20,7 +20,7 @@ const Register = () => {
 
     const handleUserSubmit = (e) => {
         e.preventDefault();
-        fetch(`${backendUrl}api/user`, {
+        fetch(`${backendUrl}/api/user`, {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(user),
             method: 'POST'
@@ -33,8 +33,8 @@ const Register = () => {
 
                     return response.json();
                 } else {
-                     throw new Error("Error en el registro");
-                     
+                    throw new Error("Error en el registro");
+
                 };
             })
             .then(data => {
