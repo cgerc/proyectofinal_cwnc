@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import useGlobalReducer from '../hooks/useGlobalReducer.jsx'//
+import useGlobalReducer from '../hooks/useGlobalReducer.jsx'
 
 const Login = () => {
     const { store, dispatch } = useGlobalReducer()
@@ -27,8 +27,6 @@ const Login = () => {
             .then(response => {
                 console.log("aqui esta la respuesta")
                 if (response.status === 200) {
-                    // alert("Usuario inició sesión exitosamente");
-
                     navigate("/pantry")
                     return response.json();
                 } else {
@@ -40,7 +38,6 @@ const Login = () => {
                 if (data.access_token) {
                     localStorage.setItem('token', data.access_token);
                     localStorage.setItem('user', JSON.stringify(data.user));
-
 
                     console.log(data)
                     dispatch({ type: "setUser", payload: data.user })
@@ -58,32 +55,79 @@ const Login = () => {
     }
 
     return (
-        <div className="text-center" style={{ maxWidth: "330px", margin: "auto", padding: "15px" }}>
-            <form className="form-signin mb-3" onSubmit={handleUserSubmit}>
-                <h1 className="h3 mb-3 font-weight-normal">Iniciar sesión</h1>
-                <label htmlFor="inputEmail" className="sr-only">Correo electrónico</label>
-                <input onChange={handleChange} name='email' type="email" id="inputEmail" className="form-control mb-3" placeholder="Email adress" required="" autoFocus="" />
-                <label htmlFor="inputPassword" className="sr-only">cONTRASEÑA</label>
-                <input onChange={handleChange} name='password' type="password" id="inputPassword" className="form-control mb-3" placeholder="Contraseña" required="" />
-                <div className='d-flex align-items-center justify-content-center flex-column'>
-                    <button className="btn btn-lg btn-primary btn-block" type="submit">Iniciar sesión</button>
-                    <p className="mt-3">
-                        ¿Eres un usuario nuevo?{' '}
-                        <span
-                            style={{
-                                color: '#007bff',
-                                cursor: 'pointer',
-                                textDecoration: 'none'
-                            }}
-                            onMouseOver={(e) => e.target.style.textDecoration = 'underline'}
-                            onMouseOut={(e) => e.target.style.textDecoration = 'none'}
-                            onClick={() => navigate('/register')}
-                        >
-                            Crear cuenta
-                        </span>
-                    </p>
+        <div className="container d-flex justify-content-center align-items-center min-vh-100">
+            <div className="card shadow-lg border-0" style={{ maxWidth: "400px", width: "100%" }}>
+                <div className="card-body p-5">
+                    <form onSubmit={handleUserSubmit}>
+                        <div className="text-center mb-4">
+                            <h1 className="h3 fw-bold text-success">Iniciar Sesión</h1>
+                            <p className="text-muted">Accede a tu cuenta de CookIA</p>
+                        </div>
+
+                        {/* Campo Email con separación */}
+                        <div className="mb-4">
+                            <label htmlFor="inputEmail" className="form-label fw-semibold">
+                                Correo electrónico
+                            </label>
+                            <input
+                                onChange={handleChange}
+                                name='email'
+                                type="email"
+                                id="inputEmail"
+                                className="form-control form-control-lg"
+                                placeholder="nombre@ejemplo.com"
+                                required
+                                autoFocus
+                            />
+                        </div>
+
+                        {/* Campo Password con separación */}
+                        <div className="mb-4">
+                            <label htmlFor="inputPassword" className="form-label fw-semibold">
+                                Contraseña
+                            </label>
+                            <input
+                                onChange={handleChange}
+                                name='password'
+                                type="password"
+                                id="inputPassword"
+                                className="form-control form-control-lg"
+                                placeholder="Ingresa tu contraseña"
+                                required
+                            />
+                        </div>
+
+                        {/* Botón con separación */}
+                        <div className="d-grid mb-4">
+                            <button
+                                className="btn btn-success btn-lg"
+                                type="submit"
+                            >
+                                Iniciar Sesión
+                            </button>
+                        </div>
+
+                        {/* Enlace registro con separación */}
+                        <div className="text-center">
+                            <p className="mb-0">
+                                ¿Eres un usuario nuevo?{' '}
+                                <span
+                                    className="text-success fw-semibold"
+                                    style={{
+                                        cursor: 'pointer',
+                                        textDecoration: 'none'
+                                    }}
+                                    onMouseOver={(e) => e.target.style.textDecoration = 'underline'}
+                                    onMouseOut={(e) => e.target.style.textDecoration = 'none'}
+                                    onClick={() => navigate('/register')}
+                                >
+                                    Crear cuenta
+                                </span>
+                            </p>
+                        </div>
+                    </form>
                 </div>
-            </form>
+            </div>
         </div>
     )
 }
