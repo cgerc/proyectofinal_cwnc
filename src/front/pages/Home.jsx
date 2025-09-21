@@ -3,6 +3,9 @@ import useGlobalReducer from "../hooks/useGlobalReducer.jsx";
 import { Link } from "react-router-dom";
 
 
+
+
+
 export const Home = () => {
   // const { store, dispatch } = useGlobalReducer()
 
@@ -56,6 +59,7 @@ export const Home = () => {
           ¡Empieza aquí!
         </Link>
       </div>
+
       
       {/* Columna de la imagen */}
       <div className="col-lg-6 text-center">
@@ -70,6 +74,12 @@ export const Home = () => {
   </div>
 </div>
      
+
+      <Link to="/random">
+      <button type="button" class="btn btn-success button1">Recetas Random!
+      </button>
+      </Link>
+
       
       <div className="Functionalities container py-5">
         <p className="fs-1 text-center mb-4"><strong>Funcionalidades</strong></p>
