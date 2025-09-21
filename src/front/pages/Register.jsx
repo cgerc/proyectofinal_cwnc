@@ -20,7 +20,7 @@ const Register = () => {
 
     const handleUserSubmit = (e) => {
         e.preventDefault();
-        fetch(`${backendUrl}api/user`, {
+        fetch(`${backendUrl}/api/user`, {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(user),
             method: 'POST'

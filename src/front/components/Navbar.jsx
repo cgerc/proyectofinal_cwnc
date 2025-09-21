@@ -31,11 +31,6 @@ export const Navbar = () => {
                     Generar Recetas
                 </Link>
             </li>
-            <li className="nav-item">
-                <Link to="/" className="nav-link text-success">
-                    AQUI VAN LOS FAV
-                </Link>
-            </li>
 
             <li>
 
