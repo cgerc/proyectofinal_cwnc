@@ -2,22 +2,34 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 import os
+from flask_bcrypt import bcrypt
 from flask import Flask, request, jsonify, url_for, send_from_directory
 from flask_migrate import Migrate
 from flask_swagger import swagger
+from flask_cors import CORS
+from dotenv import load_dotenv
+from phi.agent import Agent
+from phi.model.openai import OpenAIChat
+import os, json
+
 from api.utils import APIException, generate_sitemap
 from api.models import db
 from api.routes import api
 from api.admin import setup_admin
 from api.commands import setup_commands
+from api.extensions import jwt
 
-# from models import Person
+
+app = Flask(__name__)
+
+CORS(app, resources={r"/api/*": {"origins": "http://localhost:3000"}}, supports_credentials=True)
+load_dotenv()
 
 ENV = "development" if os.getenv("FLASK_DEBUG") == "1" else "production"
 static_file_dir = os.path.join(os.path.dirname(
     os.path.realpath(__file__)), '../dist/')
-app = Flask(__name__)
 app.url_map.strict_slashes = False
+jwt.init_app(app)
 
 # database condiguration
 db_url = os.getenv("DATABASE_URL")
@@ -57,6 +69,8 @@ def sitemap():
     return send_from_directory(static_file_dir, 'index.html')
 
 # any other endpoint will try to serve it like a static file
+
+
 @app.route('/<path:path>', methods=['GET'])
 def serve_any_other_file(path):
     if not os.path.isfile(os.path.join(static_file_dir, path)):
@@ -70,3 +84,61 @@ def serve_any_other_file(path):
 if __name__ == '__main__':
     PORT = int(os.environ.get('PORT', 3001))
     app.run(host='0.0.0.0', port=PORT, debug=True)
+
+#CRUD
+#POST +
+#GET +
+#PUT +
+#DELETE +
+class Task(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(120))           
+    description = db.Column(db.String(250))     
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "title": self.title,
+            "description": self.description
+        }
+
+# GET all tasks
+@app.route('/api/tasks', methods=['GET'])
+def get_tasks():
+    tasks = Task.query.all()
+    result = []
+    for t in tasks:
+        result.append(t.serialize())
+    return jsonify(result)
+
+# POST create a task
+@app.route('/api/task', methods=['POST'])
+def create_task():
+    data = request.get_json()
+    new = Task(title=data.get('title'), description=data.get('description'))
+    db.session.add(new)
+    db.session.commit()
+    return jsonify({"message": "task created"}), 201
+# PUT update a task
+@app.route('/api/task/<int:id>', methods=['PUT'])
+def update_task(id):
+    data = request.get_json()
+    task = Task.query.get(id)
+    if task:
+        task.title = data.get('title', task.title)
+        task.description = data.get('description', task.description)
+        db.session.commit()
+        return jsonify({"message": "task updated"})
+    else:
+        return jsonify({"error": "task not found"}), 404
+
+# DELETE a task
+@app.route('/api/task/<int:id>', methods=['DELETE'])
+def delete_task(id):
+    task = Task.query.get(id)
+    if task:
+        db.session.delete(task)
+        db.session.commit()
+        return jsonify({"message": "task deleted"})
+    else:
+        return jsonify({"error": "task not found"}), 404
