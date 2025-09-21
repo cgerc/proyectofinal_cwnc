@@ -10,11 +10,14 @@ import { Home } from "./pages/Home";
 import { Single } from "./pages/Single";
 import { Demo } from "./pages/Demo";
 import Pantry from "./pages/Pantry";
+
+
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Recipe from "./pages/Recipe";
 import RandomRecipe from "./pages/RandomRecipe";
+
 
 
 export const router = createBrowserRouter(
@@ -32,6 +35,10 @@ export const router = createBrowserRouter(
       <Route path="/" element={<Home />} />
       <Route path="/single/:theId" element={<Single />} />  {/* Dynamic route for single items */}
       <Route path="/demo" element={<Demo />} />
+
+      <Route path="/pantry" element={<Pantry />} />
+
+
       <Route path="/pantry" element={<ProtectedRoute><Pantry /></ProtectedRoute>} />
       <Route path="/register" element={<Register />} />
       <Route path="/login" element={<Login />} />
@@ -39,6 +46,7 @@ export const router = createBrowserRouter(
       <Route path="/recipe" element={<Recipe />} />
       <Route path="/random" element={<RandomRecipe/>} />
     
+
     </Route>
   )
 );
