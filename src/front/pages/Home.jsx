@@ -1,6 +1,11 @@
 import React, { useEffect } from "react"
 import useGlobalReducer from "../hooks/useGlobalReducer.jsx";
 import { Link } from "react-router-dom";
+
+
+
+
+
 export const Home = () => {
   // const { store, dispatch } = useGlobalReducer()
 
@@ -33,15 +38,48 @@ export const Home = () => {
 
   return (
     <>
-      <div className="container bg-success fondo container0 text-white py-5">
-        <p className="text-start fs-1 text1"><strong>Descubre qué<br />cocinar con lo<br />que tienes</strong></p>
-        <p className="fs-4 p1">Escribe tus ingredientes y recibe<br />recetas al instante, sin complicaciones</p>
-        <img className="imagen mt-4" src="https://i.postimg.cc/cHfJVhHb/temp-Imagey0-A82-R.avif" alt="Cocina con lo que tienes" />
+      <div className="container-fluid bg-success text-white py-5 position-relative">
+  <div className="container">
+    <div className="row align-items-center">
+      {/* Columna del texto */}
+      <div className="col-lg-6">
+        <h1 className="display-4 fw-bold mb-4">
+          Descubre qué<br />
+          cocinar con lo<br />
+          que tienes
+        </h1>
+        <p className="fs-4 mb-4">
+          Escribe tus ingredientes y recibe<br />
+          recetas al instante, sin complicaciones
+        </p>
+        <Link 
+          to="/register" 
+          className="btn btn-light btn-lg px-4 py-2 fw-bold text-success"
+        >
+          ¡Empieza aquí!
+        </Link>
       </div>
+
+      
+      {/* Columna de la imagen */}
+      <div className="col-lg-6 text-center">
+        <img 
+          className="img-fluid rounded shadow-lg" 
+          src="https://i.postimg.cc/cHfJVhHb/temp-Imagey0-A82-R.avif" 
+          alt="Cocina con lo que tienes"
+          style={{maxHeight: "400px", objectFit: "cover"}}
+        />
+      </div>
+    </div>
+  </div>
+</div>
+     
+
       <Link to="/random">
       <button type="button" class="btn btn-success button1">Recetas Random!
       </button>
       </Link>
+
       
       <div className="Functionalities container py-5">
         <p className="fs-1 text-center mb-4"><strong>Funcionalidades</strong></p>
